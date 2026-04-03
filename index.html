@@ -30,330 +30,79 @@
     --radius: 12px;
     --radius-sm: 8px;
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Nunito', sans-serif; font-weight: 600;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.7; font-size: 15px;
-  }
-
-  /* SCROLLBAR */
+  body { font-family: 'Nunito', sans-serif; font-weight: 600; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.7; font-size: 15px; }
   ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: var(--bg); }
   ::-webkit-scrollbar-thumb { background: var(--surface3); border-radius: 3px; }
 
-  /* LAYOUT */
   .shell { display: flex; min-height: 100vh; }
 
   /* SIDEBAR */
-  .sidebar {
-    width: 260px;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    z-index: 100;
-    overflow-y: auto;
-  }
-
-  .sidebar-logo {
-    padding: 28px 24px 20px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .logo-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--accent);
-    color: #0a0a0f;
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em;
-    font-size: 13px;
-    font-weight: 800;
-    padding: 4px 10px;
-    border-radius: 6px;
-    letter-spacing: 0.02em;
-    margin-bottom: 10px;
-  }
-
-  .sidebar-logo h1 {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em;
-    font-size: 24px;
-    color: var(--text);
-    line-height: 1.2;
-  }
-
-  .sidebar-logo p {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text3);
-    margin-top: 4px;
-  }
-
-  .sidebar-nav {
-    padding: 16px 12px;
-    flex: 1;
-  }
-
-  .nav-section-label {
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text3);
-    padding: 8px 12px 6px;
-  }
-
-  .nav-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    border-radius: var(--radius-sm);
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.15s;
-    margin-bottom: 2px;
-  }
-
+  .sidebar { width: 260px; background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; position: fixed; top: 0; left: 0; bottom: 0; z-index: 100; overflow-y: auto; }
+  .sidebar-logo { padding: 28px 24px 20px; border-bottom: 1px solid var(--border); }
+  .logo-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent); color: #0a0a0f; font-family: 'Bebas Neue', sans-serif; font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 6px; letter-spacing: 0.02em; margin-bottom: 10px; }
+  .sidebar-logo h1 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--text); line-height: 1.2; }
+  .sidebar-logo p { font-size: 13px; font-weight: 700; color: var(--text3); margin-top: 4px; }
+  .sidebar-nav { padding: 16px 12px; flex: 1; }
+  .nav-section-label { font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); padding: 8px 12px 6px; }
+  .nav-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 700; color: var(--text2); cursor: pointer; transition: all 0.15s; margin-bottom: 2px; }
   .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active { background: var(--amber-bg); color: var(--accent); font-weight: 800; }
+  .nav-icon { width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .sidebar-footer { padding: 16px; border-top: 1px solid var(--border); font-size: 13px; font-weight: 700; color: var(--text3); text-align: center; }
 
-  .nav-item.active {
-    background: var(--amber-bg);
-    color: var(--accent);
-    font-weight: 800;
-  }
-
-  .nav-icon {
-    width: 20px;
-    height: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
-
-  .sidebar-footer {
-    padding: 16px;
-    border-top: 1px solid var(--border);
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text3);
-    text-align: center;
-  }
-
-  /* MAIN CONTENT */
-  .main {
-    margin-left: 260px;
-    flex: 1;
-    padding: 40px;
-    min-height: 100vh;
-  }
-
-  /* SECTIONS */
+  /* MAIN */
+  .main { margin-left: 260px; flex: 1; padding: 40px; min-height: 100vh; }
   .section { display: none; animation: fadeIn 0.25s ease; }
   .section.active { display: block; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
   /* PAGE HEADER */
-  .page-header {
-    margin-bottom: 32px;
-  }
-
-  .page-header .breadcrumb {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--text3);
-    margin-bottom: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .page-header h2 {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;
-    font-size: 42px;
-    color: var(--text);
-    line-height: 1.1;
-  }
-
-  .page-header p {
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--text2);
-    margin-top: 8px;
-  }
+  .page-header { margin-bottom: 32px; }
+  .page-header .breadcrumb { font-size: 12px; font-weight: 800; color: var(--text3); margin-bottom: 10px; letter-spacing: 0.12em; text-transform: uppercase; }
+  .page-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--text); line-height: 1.1; }
+  .page-header p { font-size: 17px; font-weight: 600; color: var(--text2); margin-top: 8px; }
 
   /* CARDS */
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 16px;
-    transition: border-color 0.2s;
-  }
-
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; transition: border-color 0.2s; }
   .card:hover { border-color: var(--border2); }
-
-  .card-title {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;
-    font-size: 22px;
-    color: var(--text);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .card-title .icon {
-    width: 32px; height: 32px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px;
-    flex-shrink: 0;
-  }
+  .card-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+  .card-title .icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
 
   /* METRICS */
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .metric-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 18px;
-  }
-
-  .metric-label {
-    font-size: 12px;
-    font-weight: 800;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 6px;
-  }
-
-  .metric-value {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em;
-    font-size: 34px;
-    color: var(--text);
-  }
-
+  .metrics-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .metric-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; }
+  .metric-label { font-size: 12px; font-weight: 800; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 6px; }
+  .metric-value { font-family: 'Bebas Neue', sans-serif; font-size: 34px; color: var(--text); }
   .metric-value.green { color: var(--green); }
   .metric-value.amber { color: var(--amber); }
   .metric-value.blue { color: var(--blue); }
   .metric-value.red { color: var(--red); }
-
-  .metric-sub {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text3);
-    margin-top: 3px;
-  }
+  .metric-sub { font-size: 12px; font-weight: 600; color: var(--text3); margin-top: 3px; }
 
   /* INPUTS */
-  label {
-    display: block;
-    font-size: 14px;
-    font-weight: 800;
-    color: var(--text2);
-    margin-bottom: 6px;
-    letter-spacing: 0.01em;
-  }
-
-  input[type="text"],
-  input[type="number"],
-  select,
-  textarea {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 12px 16px;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    font-family: 'Nunito', sans-serif;
-    margin-bottom: 16px;
-    transition: border-color 0.15s;
-    outline: none;
-  }
-
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--accent);
-  }
-
+  label { display: block; font-size: 14px; font-weight: 800; color: var(--text2); margin-bottom: 6px; letter-spacing: 0.01em; }
+  input[type="text"], input[type="number"], input[type="date"], select, textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 16px; font-size: 15px; font-weight: 700; color: var(--text); font-family: 'Nunito', sans-serif; margin-bottom: 16px; transition: border-color 0.15s; outline: none; }
+  input[type="date"] { color-scheme: dark; }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
   select option { background: var(--surface2); }
-
   textarea { resize: vertical; min-height: 80px; }
 
   /* BUTTONS */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 22px;
-    border-radius: var(--radius-sm);
-    font-size: 15px;
-    font-weight: 800;
-    font-family: 'Nunito', sans-serif;
-    cursor: pointer;
-    border: 1px solid var(--border);
-    background: var(--surface2);
-    color: var(--text);
-    transition: all 0.15s;
-  }
-
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 22px; border-radius: var(--radius-sm); font-size: 15px; font-weight: 800; font-family: 'Nunito', sans-serif; cursor: pointer; border: 1px solid var(--border); background: var(--surface2); color: var(--text); transition: all 0.15s; }
   .btn:hover { background: var(--surface3); border-color: var(--border2); }
   .btn:active { transform: scale(0.98); }
-
-  .btn-accent {
-    background: var(--accent);
-    color: #0a0a0f;
-    border-color: var(--accent);
-    font-weight: 900;
-    letter-spacing: 0.02em;
-  }
-
+  .btn-accent { background: var(--accent); color: #0a0a0f; border-color: var(--accent); font-weight: 900; letter-spacing: 0.02em; }
   .btn-accent:hover { opacity: 0.9; background: var(--accent); }
-
-  .btn-green {
-    background: var(--green-bg);
-    color: var(--green);
-    border-color: rgba(62,207,142,0.3);
-  }
-
+  .btn-green { background: var(--green-bg); color: var(--green); border-color: rgba(62,207,142,0.3); }
+  .btn-red { background: var(--red-bg); color: var(--red); border-color: rgba(239,68,68,0.3); }
+  .btn-blue { background: var(--blue-bg); color: var(--blue); border-color: rgba(124,106,245,0.3); }
+  .btn-sm { padding: 6px 14px; font-size: 13px; }
   .btn-full { width: 100%; justify-content: center; }
 
-  /* TAGS / BADGES */
-  .tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 0.02em;
-    gap: 4px;
-  }
-
+  /* TAGS */
+  .tag { display: inline-flex; align-items: center; padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 800; letter-spacing: 0.02em; gap: 4px; }
   .tag-amber { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(240,192,64,0.3); }
   .tag-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(62,207,142,0.3); }
   .tag-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(124,106,245,0.3); }
@@ -366,418 +115,140 @@
 
   /* STEPS */
   .step-list { display: flex; flex-direction: column; gap: 0; }
-
-  .step-item {
-    display: flex;
-    gap: 16px;
-    padding: 16px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: flex-start;
-  }
-
+  .step-item { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
   .step-item:last-child { border-bottom: none; padding-bottom: 0; }
   .step-item:first-child { padding-top: 0; }
-
-  .step-num {
-    width: 32px; height: 32px;
-    border-radius: 50%;
-    background: var(--amber-bg);
-    color: var(--amber);
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em;
-    font-size: 15px;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    border: 1px solid rgba(240,192,64,0.3);
-  }
-
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--amber-bg); color: var(--amber); font-family: 'Bebas Neue', sans-serif; font-size: 15px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid rgba(240,192,64,0.3); }
   .step-num.green { background: var(--green-bg); color: var(--green); border-color: rgba(62,207,142,0.3); }
   .step-num.blue { background: var(--blue-bg); color: var(--blue); border-color: rgba(124,106,245,0.3); }
-
   .step-body h3 { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
   .step-body p { font-size: 14px; font-weight: 600; color: var(--text2); line-height: 1.65; }
 
   /* FORMULA */
-  .formula-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 18px 24px;
-    margin: 10px 0;
-    text-align: center;
-  }
-
-  .formula {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;
-    font-size: 22px;
-    color: var(--text);
-  }
-
-  .formula-desc {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text3);
-    margin-top: 5px;
-  }
+  .formula-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px 24px; margin: 10px 0; text-align: center; }
+  .formula { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); }
+  .formula-desc { font-size: 13px; font-weight: 700; color: var(--text3); margin-top: 5px; }
 
   /* OUTPUT BOX */
-  .output-box {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 18px;
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text2);
-    line-height: 1.9;
-    white-space: pre-wrap;
-    font-family: 'Nunito', sans-serif;
-    margin-top: 12px;
-  }
-
-  .output-box.success {
-    border-color: rgba(62,207,142,0.3);
-    background: var(--green-bg);
-    color: var(--green);
-  }
-
-  .output-box.warning {
-    border-color: rgba(240,192,64,0.3);
-    background: var(--amber-bg);
-    color: #ddb842;
-  }
-
-  .output-box.danger {
-    border-color: rgba(239,68,68,0.3);
-    background: var(--red-bg);
-    color: var(--red);
-  }
+  .output-box { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; font-size: 14px; font-weight: 700; color: var(--text2); line-height: 1.9; white-space: pre-wrap; font-family: 'Nunito', sans-serif; margin-top: 12px; }
+  .output-box.success { border-color: rgba(62,207,142,0.3); background: var(--green-bg); color: var(--green); }
+  .output-box.warning { border-color: rgba(240,192,64,0.3); background: var(--amber-bg); color: #ddb842; }
+  .output-box.danger { border-color: rgba(239,68,68,0.3); background: var(--red-bg); color: var(--red); }
 
   /* PROGRESS */
-  .progress-bar {
-    width: 100%;
-    height: 7px;
-    background: var(--surface3);
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 8px 0 6px;
-  }
-
-  .progress-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 0.4s ease;
-    background: var(--accent);
-  }
-
+  .progress-bar { width: 100%; height: 7px; background: var(--surface3); border-radius: 4px; overflow: hidden; margin: 8px 0 6px; }
+  .progress-fill { height: 100%; border-radius: 4px; transition: width 0.4s ease; background: var(--accent); }
   .progress-fill.green { background: var(--green); }
   .progress-fill.blue { background: var(--blue); }
-
-  .progress-label {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text3);
-    display: flex;
-    justify-content: space-between;
-  }
+  .progress-label { font-size: 13px; font-weight: 700; color: var(--text3); display: flex; justify-content: space-between; }
 
   /* TABS */
-  .tab-group {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-  }
-
-  .tab {
-    padding: 8px 18px;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 800;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.15s;
-    font-family: 'Nunito', sans-serif;
-  }
-
+  .tab-group { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .tab { padding: 8px 18px; border-radius: 20px; font-size: 14px; font-weight: 800; border: 1px solid var(--border); background: transparent; color: var(--text2); cursor: pointer; transition: all 0.15s; font-family: 'Nunito', sans-serif; }
   .tab:hover { border-color: var(--border2); color: var(--text); }
-
-  .tab.active {
-    background: var(--amber-bg);
-    color: var(--accent);
-    border-color: rgba(240,192,64,0.4);
-  }
+  .tab.active { background: var(--amber-bg); color: var(--accent); border-color: rgba(240,192,64,0.4); }
 
   /* SLIDER */
-  .slider-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-
+  .slider-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .slider-row label { margin: 0; min-width: 160px; flex-shrink: 0; }
-
-  input[type="range"] {
-    flex: 1;
-    margin: 0;
-    height: 4px;
-    appearance: none;
-    background: var(--surface3);
-    border-radius: 2px;
-    outline: none;
-    border: none;
-    padding: 0;
-  }
-
-  input[type="range"]::-webkit-slider-thumb {
-    appearance: none;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    cursor: pointer;
-  }
-
-  .slider-val {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em;
-    font-size: 22px;
-    color: var(--text);
-    min-width: 52px;
-    text-align: right;
-  }
+  input[type="range"] { flex: 1; margin: 0; height: 4px; appearance: none; background: var(--surface3); border-radius: 2px; outline: none; border: none; padding: 0; }
+  input[type="range"]::-webkit-slider-thumb { appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); cursor: pointer; }
+  .slider-val { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--text); min-width: 52px; text-align: right; }
 
   /* CHECKLIST */
   .checklist { display: flex; flex-direction: column; gap: 0; }
-
-  .check-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
-    cursor: pointer;
-    transition: opacity 0.2s;
-    user-select: none;
-  }
-
+  .check-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; transition: opacity 0.2s; user-select: none; }
   .check-item:last-child { border-bottom: none; }
-
-  .check-circle {
-    width: 22px; height: 22px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border2);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.15s;
-  }
-
-  .check-circle.done {
-    background: var(--green-bg);
-    border-color: rgba(62,207,142,0.5);
-  }
-
-  .check-circle.done::after {
-    content: '';
-    width: 10px; height: 6px;
-    border-left: 2px solid var(--green);
-    border-bottom: 2px solid var(--green);
-    transform: rotate(-45deg) translateY(-1px);
-  }
-
-  .check-text {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text);
-    transition: color 0.2s;
-  }
-
-  .check-item.done .check-text {
-    text-decoration: line-through;
-    color: var(--text3);
-  }
+  .check-circle { width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.15s; }
+  .check-circle.done { background: var(--green-bg); border-color: rgba(62,207,142,0.5); }
+  .check-circle.done::after { content: ''; width: 10px; height: 6px; border-left: 2px solid var(--green); border-bottom: 2px solid var(--green); transform: rotate(-45deg) translateY(-1px); }
+  .check-text { font-size: 15px; font-weight: 700; color: var(--text); transition: color 0.2s; }
+  .check-item.done .check-text { text-decoration: line-through; color: var(--text3); }
 
   /* DIVIDER */
-  .divider {
-    height: 1px;
-    background: var(--border);
-    margin: 20px 0;
-  }
-
+  .divider { height: 1px; background: var(--border); margin: 20px 0; }
   .row { display: flex; gap: 16px; }
   .half { flex: 1; min-width: 0; }
 
-  /* HERO CARD (ringkasan) */
-  .hero-banner {
-    background: linear-gradient(135deg, #1a1a0e 0%, #0f0f1a 100%);
-    border: 1px solid rgba(240,192,64,0.2);
-    border-radius: var(--radius);
-    padding: 36px;
-    margin-bottom: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero-banner::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(240,192,64,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-
-  .hero-banner .quote {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;
-    font-size: 32px;
-    color: var(--accent);
-    margin-bottom: 10px;
-    line-height: 1.2;
-  }
-
-  .hero-banner .quote-author {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text3);
-  }
+  /* HERO */
+  .hero-banner { background: linear-gradient(135deg, #1a1a0e 0%, #0f0f1a 100%); border: 1px solid rgba(240,192,64,0.2); border-radius: var(--radius); padding: 36px; margin-bottom: 24px; position: relative; overflow: hidden; }
+  .hero-banner::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(240,192,64,0.12) 0%, transparent 70%); pointer-events: none; }
+  .hero-banner .quote { font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--accent); margin-bottom: 10px; line-height: 1.2; }
+  .hero-banner .quote-author { font-size: 14px; font-weight: 700; color: var(--text3); }
 
   /* CORE FOUR CARDS */
-  .core4-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .c4-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 18px;
-    transition: all 0.2s;
-  }
-
+  .core4-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .c4-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 18px; transition: all 0.2s; }
   .c4-card:hover { border-color: var(--border2); transform: translateY(-2px); }
-
-  .c4-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    margin-bottom: 12px;
-  }
-
+  .c4-dot { width: 12px; height: 12px; border-radius: 50%; margin-bottom: 12px; }
   .c4-card h3 { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
   .c4-card p { font-size: 13px; font-weight: 600; color: var(--text3); line-height: 1.6; }
 
-  /* DIAGNOSIS RESULT */
-  .diag-card {
-    border-radius: var(--radius-sm);
-    padding: 18px;
-    margin-top: 16px;
-    display: none;
-  }
-
+  /* DIAGNOSIS */
+  .diag-card { border-radius: var(--radius-sm); padding: 18px; margin-top: 16px; display: none; }
   .diag-card.excellent { background: var(--green-bg); border: 1px solid rgba(62,207,142,0.3); }
   .diag-card.good { background: var(--blue-bg); border: 1px solid rgba(124,106,245,0.3); }
   .diag-card.warning { background: var(--amber-bg); border: 1px solid rgba(240,192,64,0.3); }
   .diag-card.danger { background: var(--red-bg); border: 1px solid rgba(239,68,68,0.3); }
-
   .diag-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 8px; }
   .diag-card p { font-size: 14px; font-weight: 600; line-height: 1.7; }
-
   .diag-card.excellent h3, .diag-card.excellent p { color: var(--green); }
   .diag-card.good h3, .diag-card.good p { color: var(--blue); }
   .diag-card.warning h3, .diag-card.warning p { color: var(--amber); }
   .diag-card.danger h3, .diag-card.danger p { color: var(--red); }
 
-  /* COUNTER DISPLAY */
-  .big-counter {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.04em;
-    font-size: 80px;
-    color: var(--accent);
-    line-height: 1;
-    text-align: center;
-    padding: 16px 0;
-  }
+  /* COUNTER */
+  .big-counter { font-family: 'Bebas Neue', sans-serif; font-size: 80px; color: var(--accent); line-height: 1; text-align: center; padding: 16px 0; }
+  .counter-label { text-align: center; font-size: 15px; font-weight: 700; color: var(--text3); }
 
-  .counter-label {
-    text-align: center;
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--text3);
-  }
-
-  /* SECTION BAB RINGKASAN */
-  .bab-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    margin-bottom: 12px;
-    transition: all 0.2s;
-  }
-
+  /* BAB */
+  .bab-card { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: var(--radius); padding: 22px 26px; margin-bottom: 12px; transition: all 0.2s; }
   .bab-card:hover { border-left-color: var(--accent2); }
-
-  .bab-num {
-    font-size: 12px;
-    font-weight: 900;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: 8px;
-  }
-
-  .bab-title {
-    font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;
-    font-size: 26px;
-    color: var(--text);
-    margin-bottom: 10px;
-  }
-
-  .bab-body {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text2);
-    line-height: 1.75;
-  }
-
-  .bab-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 14px;
-  }
+  .bab-num { font-size: 12px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+  .bab-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--text); margin-bottom: 10px; }
+  .bab-body { font-size: 15px; font-weight: 600; color: var(--text2); line-height: 1.75; }
+  .bab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
 
   /* INFO ROW */
-  .info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--border);
-    font-size: 15px;
-    font-weight: 700;
-  }
-
+  .info-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 15px; font-weight: 700; }
   .info-row:last-child { border-bottom: none; }
   .info-row .info-label { color: var(--text3); font-weight: 700; }
   .info-row .info-val { color: var(--text); font-weight: 800; }
 
-  /* MOBILE HAMBURGER */
-  .hamburger {
-    display: none;
-    position: fixed;
-    top: 16px; right: 16px;
-    z-index: 200;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 8px 12px;
-    cursor: pointer;
-    color: var(--text);
-    font-size: 18px;
-  }
+  /* HISTORY TABLE */
+  .history-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  .history-table th { text-align: left; padding: 10px 12px; font-size: 11px; font-weight: 900; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid var(--border); }
+  .history-table td { padding: 11px 12px; border-bottom: 1px solid var(--border); font-weight: 700; color: var(--text2); vertical-align: middle; }
+  .history-table tr:last-child td { border-bottom: none; }
+  .history-table tr:hover td { background: var(--surface2); }
+  .history-table .td-actions { display: flex; gap: 6px; }
+
+  /* STATUS DOTS */
+  .status-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.red { background: var(--red); }
+  .status-dot.amber { background: var(--amber); }
+
+  /* EMPTY STATE */
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--text3); font-size: 15px; font-weight: 700; }
+  .empty-state .empty-icon { font-size: 36px; margin-bottom: 12px; }
+
+  /* EDIT MODAL */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 300; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+  .modal { background: var(--surface); border: 1px solid var(--border2); border-radius: var(--radius); padding: 28px; width: 480px; max-width: 95vw; max-height: 90vh; overflow-y: auto; }
+  .modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--text); margin-bottom: 20px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 6px; }
+
+  /* PANDUAN */
+  .panduan-section { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 20px; margin-bottom: 14px; }
+  .panduan-section h3 { font-size: 16px; font-weight: 900; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .panduan-section p, .panduan-section li { font-size: 14px; font-weight: 600; color: var(--text2); line-height: 1.8; }
+  .panduan-section ul, .panduan-section ol { padding-left: 20px; margin-top: 6px; }
+  .panduan-section li { margin-bottom: 4px; }
+  .panduan-tip { background: var(--amber-bg); border: 1px solid rgba(240,192,64,0.3); border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 12px; font-size: 14px; font-weight: 700; color: var(--amber); }
+
+  /* HAMBURGER */
+  .hamburger { display: none; position: fixed; top: 16px; right: 16px; z-index: 200; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; cursor: pointer; color: var(--text); font-size: 18px; }
 
   @media (max-width: 768px) {
     .sidebar { transform: translateX(-260px); transition: transform 0.3s; }
@@ -802,13 +273,11 @@
       <h1>Panduan Interaktif</h1>
       <p>Alex Hormozi · Bahasa Indonesia</p>
     </div>
-
     <nav class="sidebar-nav">
       <div class="nav-section-label">Buku</div>
       <div class="nav-item active" onclick="showSection('ringkasan', this)">
         <span class="nav-icon">📖</span> Ringkasan Bab
       </div>
-
       <div class="nav-section-label" style="margin-top:8px">Tools</div>
       <div class="nav-item" onclick="showSection('corefour', this)">
         <span class="nav-icon">⚡</span> Core Four Tracker
@@ -829,7 +298,6 @@
         <span class="nav-icon">🗺️</span> Roadmap Saya
       </div>
     </nav>
-
     <div class="sidebar-footer">
       Dibuat berdasarkan buku $100M Leads<br>oleh Alex Hormozi © 2023
     </div>
@@ -845,94 +313,46 @@
         <h2>$100M Leads — Ringkasan Lengkap</h2>
         <p>Semua konsep kunci dari buku Alex Hormozi, disusun per bab.</p>
       </div>
-
       <div class="hero-banner">
         <div class="quote">"Hard to be poor with leads bangin' down your door."</div>
         <div class="quote-author">— Hormozi Family Jingle</div>
       </div>
-
       <div class="bab-card">
         <div class="bab-num">Bagian I</div>
         <div class="bab-title">Mulai di Sini — Kisah &amp; Masalah</div>
-        <div class="bab-body">
-          Alex kehilangan $150.000 dalam semalam akibat refund massal dari gym owners yang curang. Dari titik nol itulah ia membangun Gym Launch menjadi $6,8 juta di tahun pertama — hanya bermodal kartu kredit, satu sistem leads, dan keberanian membagikan rahasia advertising-nya. Pelajaran utama: <strong>kemampuan mendapat leads adalah kartu bebas masalah tanpa batas waktu.</strong> Buku ini menyelesaikan satu masalah: kamu tidak mendapat cukup leads karena tidak advertising cukup banyak.
-        </div>
-        <div class="bab-tags">
-          <span class="tag tag-amber">Origin Story</span>
-          <span class="tag tag-orange">Core Problem</span>
-          <span class="tag tag-blue">Mindset</span>
-        </div>
+        <div class="bab-body">Alex kehilangan $150.000 dalam semalam akibat refund massal dari gym owners yang curang. Dari titik nol itulah ia membangun Gym Launch menjadi $6,8 juta di tahun pertama — hanya bermodal kartu kredit, satu sistem leads, dan keberanian membagikan rahasia advertising-nya. Pelajaran utama: <strong>kemampuan mendapat leads adalah kartu bebas masalah tanpa batas waktu.</strong> Buku ini menyelesaikan satu masalah: kamu tidak mendapat cukup leads karena tidak advertising cukup banyak.</div>
+        <div class="bab-tags"><span class="tag tag-amber">Origin Story</span><span class="tag tag-orange">Core Problem</span><span class="tag tag-blue">Mindset</span></div>
       </div>
-
       <div class="bab-card">
         <div class="bab-num">Bagian II</div>
         <div class="bab-title">Pahami Dulu — Lead, Engaged Lead &amp; Lead Magnet</div>
-        <div class="bab-body">
-          <strong>Lead</strong> = siapapun yang bisa kamu hubungi. <strong>Engaged Lead</strong> = orang yang menunjukkan ketertarikan pada produkmu — inilah output nyata dari advertising. Untuk mendapat engaged leads, kamu butuh <strong>Lead Magnet</strong>: solusi lengkap untuk masalah sempit, gratis, yang sesudah dikonsumsi membuat mereka ingin lebih dari core offer-mu. 7 langkah membuat lead magnet: (1) Tentukan masalah &amp; avatar, (2) Tentukan cara solusi, (3) Tentukan cara penyampaian, (4) Test nama, (5) Buat mudah dikonsumsi, (6) Buat luar biasa bagus, (7) Beri CTA yang jelas.
-        </div>
-        <div class="bab-tags">
-          <span class="tag tag-amber">Lead Magnet</span>
-          <span class="tag tag-green">Value Equation</span>
-          <span class="tag tag-blue">7 Langkah</span>
-        </div>
+        <div class="bab-body"><strong>Lead</strong> = siapapun yang bisa kamu hubungi. <strong>Engaged Lead</strong> = orang yang menunjukkan ketertarikan pada produkmu — inilah output nyata dari advertising. Untuk mendapat engaged leads, kamu butuh <strong>Lead Magnet</strong>: solusi lengkap untuk masalah sempit, gratis, yang sesudah dikonsumsi membuat mereka ingin lebih dari core offer-mu. 7 langkah membuat lead magnet: (1) Tentukan masalah &amp; avatar, (2) Tentukan cara solusi, (3) Tentukan cara penyampaian, (4) Test nama, (5) Buat mudah dikonsumsi, (6) Buat luar biasa bagus, (7) Beri CTA yang jelas.</div>
+        <div class="bab-tags"><span class="tag tag-amber">Lead Magnet</span><span class="tag tag-green">Value Equation</span><span class="tag tag-blue">7 Langkah</span></div>
       </div>
-
       <div class="bab-card">
         <div class="bab-num">Bagian III</div>
         <div class="bab-title">Core Four — 4 Cara Mendapat Leads</div>
-        <div class="bab-body">
-          Hanya ada 4 cara satu orang memberitahu orang lain tentang produknya:
-        </div>
+        <div class="bab-body">Hanya ada 4 cara satu orang memberitahu orang lain tentang produknya:</div>
         <div style="margin-top:14px">
           <div class="core4-grid">
-            <div class="c4-card">
-              <div class="c4-dot" style="background:#f0c040"></div>
-              <h3>Warm Outreach</h3>
-              <p>1-ke-1 ke audiens hangat. Hubungi 100 orang/hari dari kontakmu. Benchmark: 20 reply → 4 ambil → 1 bayar.</p>
-            </div>
-            <div class="c4-card">
-              <div class="c4-dot" style="background:#3ecf8e"></div>
-              <h3>Post Free Content</h3>
-              <p>1-ke-banyak audiens hangat. Bangun audiens dulu, lalu monetisasi. Rasio give:ask minimum 3:1.</p>
-            </div>
-            <div class="c4-card">
-              <div class="c4-dot" style="background:#7c6af5"></div>
-              <h3>Cold Outreach</h3>
-              <p>1-ke-1 ke orang asing. Butuh: list, pesan personal + value besar, volume tinggi + follow-up.</p>
-            </div>
-            <div class="c4-card">
-              <div class="c4-dot" style="background:#ff6b35"></div>
-              <h3>Paid Ads</h3>
-              <p>1-ke-banyak orang asing. Paling cepat scale. Kunci: LTGP:CAC ≥ 3:1. Fasa: Track → Rugi → Cetak.</p>
-            </div>
+            <div class="c4-card"><div class="c4-dot" style="background:#f0c040"></div><h3>Warm Outreach</h3><p>1-ke-1 ke audiens hangat. Hubungi 100 orang/hari dari kontakmu. Benchmark: 20 reply → 4 ambil → 1 bayar.</p></div>
+            <div class="c4-card"><div class="c4-dot" style="background:#3ecf8e"></div><h3>Post Free Content</h3><p>1-ke-banyak audiens hangat. Bangun audiens dulu, lalu monetisasi. Rasio give:ask minimum 3:1.</p></div>
+            <div class="c4-card"><div class="c4-dot" style="background:#7c6af5"></div><h3>Cold Outreach</h3><p>1-ke-1 ke orang asing. Butuh: list, pesan personal + value besar, volume tinggi + follow-up.</p></div>
+            <div class="c4-card"><div class="c4-dot" style="background:#ff6b35"></div><h3>Paid Ads</h3><p>1-ke-banyak orang asing. Paling cepat scale. Kunci: LTGP:CAC ≥ 3:1. Fasa: Track → Rugi → Cetak.</p></div>
           </div>
         </div>
-        <div class="bab-tags">
-          <span class="tag tag-amber">Warm Outreach</span>
-          <span class="tag tag-green">Free Content</span>
-          <span class="tag tag-blue">Cold Outreach</span>
-          <span class="tag tag-orange">Paid Ads</span>
-        </div>
+        <div class="bab-tags"><span class="tag tag-amber">Warm Outreach</span><span class="tag tag-green">Free Content</span><span class="tag tag-blue">Cold Outreach</span><span class="tag tag-orange">Paid Ads</span></div>
       </div>
-
       <div class="bab-card">
         <div class="bab-num">Bagian IV</div>
         <div class="bab-title">Lead Getters — Orang Lain Cari Leads Untukmu</div>
-        <div class="bab-body">
-          Setelah Core Four dikuasai, scale dengan lead getters — orang/entitas yang melakukan Core Four atas namamu:<br><br>
+        <div class="bab-body">Setelah Core Four dikuasai, scale dengan lead getters — orang/entitas yang melakukan Core Four atas namamu:<br><br>
           <strong>1. Customer Referrals</strong> — pelanggan puas merekomendasikan ke temannya. Buat sistem aktif, jangan tunggu spontan.<br>
           <strong>2. Karyawan</strong> — tim sales/marketing yang mereplikasi prosesmu.<br>
           <strong>3. Agensi</strong> — bisnis eksternal yang mengelola advertising channel tertentu.<br>
-          <strong>4. Afiliasi &amp; Partner</strong> — bisnis lain memberitahu audiens mereka tentang produkmu. Leverage tertinggi: kerja sekali, leads terus mengalir.
-        </div>
-        <div class="bab-tags">
-          <span class="tag tag-green">Referral System</span>
-          <span class="tag tag-blue">Tim Sales</span>
-          <span class="tag tag-amber">Afiliasi</span>
-          <span class="tag tag-orange">Leverage</span>
-        </div>
+          <strong>4. Afiliasi &amp; Partner</strong> — bisnis lain memberitahu audiens mereka tentang produkmu. Leverage tertinggi: kerja sekali, leads terus mengalir.</div>
+        <div class="bab-tags"><span class="tag tag-green">Referral System</span><span class="tag tag-blue">Tim Sales</span><span class="tag tag-amber">Afiliasi</span><span class="tag tag-orange">Leverage</span></div>
       </div>
-
       <div class="bab-card">
         <div class="bab-num">Bagian V</div>
         <div class="bab-title">Mulai — Rule of 100 &amp; Framework More Better New</div>
@@ -940,11 +360,7 @@
           <strong>Rule of 100:</strong> Lakukan 100 tindakan utama per hari selama 100 hari berturut-turut di salah satu Core Four. Hormozi menjamin: siapapun yang melakukannya akan mendapat lebih banyak engaged leads.<br><br>
           <strong>More → Better → New:</strong> Kalau hasil kurang, pertama lakukan LEBIH BANYAK dari yang sudah berhasil. Kalau sudah maksimal, buat LEBIH BAIK dengan testing satu hal per minggu. Kalau sudah dioptimalkan, coba TEMPAT BARU (platform baru, Core Four baru).
         </div>
-        <div class="bab-tags">
-          <span class="tag tag-amber">Rule of 100</span>
-          <span class="tag tag-green">More Better New</span>
-          <span class="tag tag-blue">Testing Framework</span>
-        </div>
+        <div class="bab-tags"><span class="tag tag-amber">Rule of 100</span><span class="tag tag-green">More Better New</span><span class="tag tag-blue">Testing Framework</span></div>
       </div>
     </div>
 
@@ -956,33 +372,54 @@
         <p>Catat 4 aktivitas advertising harianmu dan lihat apakah kamu sudah mencapai benchmark Hormozi.</p>
       </div>
 
-      <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-label">Warm Outreach</div>
-          <div class="metric-value amber" id="cf-warm">0</div>
-          <div class="metric-sub">Target: 100/hari</div>
+      <!-- PANDUAN CORE FOUR -->
+      <div class="card" style="border-color:rgba(240,192,64,0.2);background:linear-gradient(135deg,#1a1a0e,#111118)">
+        <div class="card-title" style="cursor:pointer" onclick="togglePanduan('panduan-cf')">
+          <div class="icon" style="background:var(--amber-bg)">📚</div>
+          Panduan Core Four Tracker
+          <span id="panduan-cf-toggle" style="margin-left:auto;font-size:14px;color:var(--text3)">▼ Buka</span>
         </div>
-        <div class="metric-card">
-          <div class="metric-label">Konten Dipost</div>
-          <div class="metric-value green" id="cf-content">0</div>
-          <div class="metric-sub">Target: 1+/hari</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Cold Outreach</div>
-          <div class="metric-value blue" id="cf-cold">0</div>
-          <div class="metric-sub">Target: 100/hari</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Menit Iklan</div>
-          <div class="metric-value" style="color:var(--accent2)" id="cf-ads">0</div>
-          <div class="metric-sub">Target: 100 menit/hari</div>
+        <div id="panduan-cf" style="display:none">
+          <div class="panduan-section">
+            <h3>🎯 Apa itu Core Four?</h3>
+            <p>Core Four adalah 4 cara satu-satunya untuk mendapat leads. Alex Hormozi menyatakan: <em>"Tidak ada cara lain yang bukan turunan dari keempat ini."</em> Pilih minimal 1, kuasai sebelum pindah ke yang lain.</p>
+          </div>
+          <div class="panduan-section">
+            <h3>⚡ Cara Menggunakan Tracker Ini</h3>
+            <ol>
+              <li>Isi angka aktivitas hari ini di setiap kolom input</li>
+              <li>Klik <strong>Simpan Hari Ini</strong> untuk menyimpan ke history</li>
+              <li>Lihat history semua hari sebelumnya di bawah</li>
+              <li>Klik ✏️ pada baris history untuk mengedit data yang sudah tersimpan</li>
+              <li>Klik 🗑️ untuk menghapus data hari tertentu</li>
+            </ol>
+            <div class="panduan-tip">💡 Data tersimpan di browser (localStorage) — tidak akan hilang saat halaman di-refresh.</div>
+          </div>
+          <div class="panduan-section">
+            <h3>📊 Target Benchmark Hormozi</h3>
+            <ul>
+              <li><strong>Warm Outreach:</strong> 100 pesan/hari → 20 reply → 4 tertarik → 1 bayar</li>
+              <li><strong>Konten:</strong> Minimal 1 post/hari (rasio give:ask = 3:1)</li>
+              <li><strong>Cold Outreach:</strong> 100 email/DM/hari → open 30% → reply 10% → 1% jadi customer</li>
+              <li><strong>Paid Ads:</strong> 100 menit kerja/hari mengoptimalkan kampanye</li>
+            </ul>
+          </div>
         </div>
       </div>
 
+      <!-- INPUT HARI INI -->
+      <div class="metrics-grid">
+        <div class="metric-card"><div class="metric-label">Warm Outreach</div><div class="metric-value amber" id="cf-warm">0</div><div class="metric-sub">Target: 100/hari</div></div>
+        <div class="metric-card"><div class="metric-label">Konten Dipost</div><div class="metric-value green" id="cf-content">0</div><div class="metric-sub">Target: 1+/hari</div></div>
+        <div class="metric-card"><div class="metric-label">Cold Outreach</div><div class="metric-value blue" id="cf-cold">0</div><div class="metric-sub">Target: 100/hari</div></div>
+        <div class="metric-card"><div class="metric-label">Menit Iklan</div><div class="metric-value" style="color:var(--accent2)" id="cf-ads">0</div><div class="metric-sub">Target: 100 menit/hari</div></div>
+      </div>
+
       <div class="card">
-        <div class="card-title">
-          <div class="icon" style="background:var(--amber-bg)">⚡</div>
-          Catat Aktivitas Hari Ini
+        <div class="card-title"><div class="icon" style="background:var(--amber-bg)">⚡</div>Catat Aktivitas Hari Ini</div>
+        <div style="margin-bottom:14px">
+          <label>Tanggal</label>
+          <input type="date" id="cf-date" style="max-width:200px">
         </div>
         <div class="row">
           <div class="half">
@@ -998,63 +435,52 @@
             <input type="number" id="in-ads" min="0" placeholder="0" oninput="updateCF()">
           </div>
         </div>
-        <div id="cf-feedback" style="display:none"></div>
+        <label>Catatan / Refleksi (opsional)</label>
+        <textarea id="in-cf-note" placeholder="Apa yang berhasil hari ini? Hambatan apa yang ditemui?" style="min-height:60px"></textarea>
+        <div id="cf-feedback" style="display:none;margin-bottom:12px"></div>
+        <button class="btn btn-accent btn-full" onclick="saveCFDay()">💾 Simpan Hari Ini</button>
+      </div>
+
+      <!-- HISTORY CORE FOUR -->
+      <div class="card">
+        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
+          <span><div class="icon" style="background:var(--blue-bg);display:inline-flex">📋</div> History Aktivitas</span>
+          <button class="btn btn-sm btn-red" onclick="clearCFHistory()" style="font-size:12px">🗑️ Hapus Semua</button>
+        </div>
+        <div id="cf-history-container">
+          <div class="empty-state"><div class="empty-icon">📭</div><div>Belum ada data tersimpan. Mulai catat aktivitasmu!</div></div>
+        </div>
       </div>
 
       <div class="grid2">
         <div class="card">
           <div class="card-title"><div class="icon" style="background:var(--amber-bg)">📈</div>Benchmark Warm Outreach</div>
           <div class="step-list">
-            <div class="step-item">
-              <div class="step-num">100</div>
-              <div class="step-body"><h3>Reach Out / Hari</h3><p>Kirim 100 pesan personal ke orang yang kamu kenal.</p></div>
-            </div>
-            <div class="step-item">
-              <div class="step-num">20</div>
-              <div class="step-body"><h3>Reply Diharapkan</h3><p>20% dari outreach akan membalas (1 dari 5 orang).</p></div>
-            </div>
-            <div class="step-item">
-              <div class="step-num">4</div>
-              <div class="step-body"><h3>Ambil Penawaran</h3><p>4 orang akan tertarik dengan penawaran gratis-mu.</p></div>
-            </div>
-            <div class="step-item">
-              <div class="step-num">1</div>
-              <div class="step-body"><h3>Bayar</h3><p>1 dari 4 yang ambil gratis akan convert ke paying customer.</p></div>
-            </div>
+            <div class="step-item"><div class="step-num">100</div><div class="step-body"><h3>Reach Out / Hari</h3><p>Kirim 100 pesan personal ke orang yang kamu kenal.</p></div></div>
+            <div class="step-item"><div class="step-num">20</div><div class="step-body"><h3>Reply Diharapkan</h3><p>20% dari outreach akan membalas (1 dari 5 orang).</p></div></div>
+            <div class="step-item"><div class="step-num">4</div><div class="step-body"><h3>Ambil Penawaran</h3><p>4 orang akan tertarik dengan penawaran gratis-mu.</p></div></div>
+            <div class="step-item"><div class="step-num">1</div><div class="step-body"><h3>Bayar</h3><p>1 dari 4 yang ambil gratis akan convert ke paying customer.</p></div></div>
           </div>
         </div>
         <div class="card">
           <div class="card-title"><div class="icon" style="background:var(--blue-bg)">📧</div>Benchmark Cold Outreach</div>
           <div class="step-list">
-            <div class="step-item">
-              <div class="step-num blue">100</div>
-              <div class="step-body"><h3>Email Dikirim / Hari</h3><p>Kirim 100 email personal ke target list.</p></div>
-            </div>
-            <div class="step-item">
-              <div class="step-num blue">30</div>
-              <div class="step-body"><h3>Open Rate (30%)</h3><p>30 orang membuka email-mu.</p></div>
-            </div>
-            <div class="step-item">
-              <div class="step-num blue">3</div>
-              <div class="step-body"><h3>Reply (10% dari pembuka)</h3><p>3 orang reply = 3% engaged leads.</p></div>
-            </div>
-            <div class="step-item">
-              <div class="step-num blue">1</div>
-              <div class="step-body"><h3>Customer Baru</h3><p>1 dari 3 yang reply akan jadi customer. 1% per 100 email.</p></div>
-            </div>
+            <div class="step-item"><div class="step-num blue">100</div><div class="step-body"><h3>Email Dikirim / Hari</h3><p>Kirim 100 email personal ke target list.</p></div></div>
+            <div class="step-item"><div class="step-num blue">30</div><div class="step-body"><h3>Open Rate (30%)</h3><p>30 orang membuka email-mu.</p></div></div>
+            <div class="step-item"><div class="step-num blue">3</div><div class="step-body"><h3>Reply (10% dari pembuka)</h3><p>3 orang reply = 3% engaged leads.</p></div></div>
+            <div class="step-item"><div class="step-num blue">1</div><div class="step-body"><h3>Customer Baru</h3><p>1 dari 3 yang reply akan jadi customer. 1% per 100 email.</p></div></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ===== LEAD MAGNET BUILDER ===== -->
+    <!-- ===== LEAD MAGNET ===== -->
     <div id="leadmagnet" class="section">
       <div class="page-header">
         <div class="breadcrumb">Tools · Konten</div>
         <h2>Lead Magnet Builder</h2>
         <p>Buat lead magnet yang efektif menggunakan 7 langkah dari metode Hormozi.</p>
       </div>
-
       <div class="grid2">
         <div>
           <div class="card">
@@ -1066,7 +492,6 @@
             <label>Core offer-mu (produk utama yang dijual)</label>
             <input type="text" id="lm-core" placeholder="Contoh: sistem manajemen gym seharga Rp5jt/tahun">
           </div>
-
           <div class="card">
             <div class="card-title"><div class="icon" style="background:var(--green-bg)">2️⃣</div>Tipe Lead Magnet</div>
             <div class="tab-group" id="lm-type-tabs">
@@ -1076,7 +501,6 @@
             </div>
             <div id="lm-type-desc" class="output-box">Ungkap masalah yang tidak disadari prospek. Lakukan diagnosis, audit, atau asesmen gratis yang menunjukkan gap antara kondisi sekarang vs yang seharusnya.</div>
           </div>
-
           <div class="card">
             <div class="card-title"><div class="icon" style="background:var(--blue-bg)">3️⃣</div>Format Penyampaian</div>
             <div class="tab-group">
@@ -1087,7 +511,6 @@
             </div>
           </div>
         </div>
-
         <div>
           <div class="card">
             <div class="card-title"><div class="icon" style="background:var(--amber-bg)">4️⃣</div>Nama &amp; CTA</div>
@@ -1099,27 +522,16 @@
             <input type="text" id="lm-scarcity" placeholder="Contoh: Hanya 5 slot tersedia bulan ini">
             <button class="btn btn-accent btn-full" onclick="generateLM()">✨ Generate Lead Magnet</button>
           </div>
-
           <div class="card" style="margin-top:0">
             <div class="card-title">💡 Tips Hormozi</div>
             <div class="step-list">
-              <div class="step-item">
-                <div class="step-num">!</div>
-                <div class="step-body"><h3>Buat seharga yang bisa dijual</h3><p>Lead magnet harus cukup bagus untuk dijual, tapi diberikan gratis.</p></div>
-              </div>
-              <div class="step-item">
-                <div class="step-num">!</div>
-                <div class="step-body"><h3>Test nama dulu</h3><p>5x lebih banyak orang membaca headline daripada isi. Test nama ke audiens sebelum launch.</p></div>
-              </div>
-              <div class="step-item">
-                <div class="step-num">!</div>
-                <div class="step-body"><h3>4 format sekaligus</h3><p>Buat dalam video, teks, audio, dan gambar. Ini bisa 2-4x lipat jangkauanmu.</p></div>
-              </div>
+              <div class="step-item"><div class="step-num">!</div><div class="step-body"><h3>Buat seharga yang bisa dijual</h3><p>Lead magnet harus cukup bagus untuk dijual, tapi diberikan gratis.</p></div></div>
+              <div class="step-item"><div class="step-num">!</div><div class="step-body"><h3>Test nama dulu</h3><p>5x lebih banyak orang membaca headline daripada isi. Test nama ke audiens sebelum launch.</p></div></div>
+              <div class="step-item"><div class="step-num">!</div><div class="step-body"><h3>4 format sekaligus</h3><p>Buat dalam video, teks, audio, dan gambar. Ini bisa 2-4x lipat jangkauanmu.</p></div></div>
             </div>
           </div>
         </div>
       </div>
-
       <div id="lm-result" style="display:none" class="card">
         <div class="card-title" style="color:var(--green)">✅ Lead Magnet-mu Siap!</div>
         <div id="lm-output" class="output-box"></div>
@@ -1133,7 +545,6 @@
         <h2>Kalkulator LTGP : CAC</h2>
         <p>Hitung rasio kritis Hormozi. Target minimum 3:1 sebelum scale iklan.</p>
       </div>
-
       <div class="grid2">
         <div class="card">
           <div class="card-title"><div class="icon" style="background:var(--amber-bg)">📥</div>Input Data Bisnis</div>
@@ -1150,47 +561,19 @@
           <label>Jumlah customer baru per bulan</label>
           <input type="number" id="k-newcust" placeholder="10" oninput="calcLTGP()">
         </div>
-
         <div>
           <div class="metrics-grid" style="grid-template-columns:1fr 1fr">
-            <div class="metric-card">
-              <div class="metric-label">LTGP per Customer</div>
-              <div class="metric-value amber" id="k-ltgp">—</div>
-              <div class="metric-sub">Lifetime Gross Profit</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">CAC</div>
-              <div class="metric-value" id="k-cac">—</div>
-              <div class="metric-sub">Cost to Acquire</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Rasio LTGP:CAC</div>
-              <div class="metric-value" id="k-ratio">—</div>
-              <div class="metric-sub">Target ≥ 3:1</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Gross Profit/Bulan</div>
-              <div class="metric-value green" id="k-gp">—</div>
-              <div class="metric-sub">Sebelum biaya iklan</div>
-            </div>
+            <div class="metric-card"><div class="metric-label">LTGP per Customer</div><div class="metric-value amber" id="k-ltgp">—</div><div class="metric-sub">Lifetime Gross Profit</div></div>
+            <div class="metric-card"><div class="metric-label">CAC</div><div class="metric-value" id="k-cac">—</div><div class="metric-sub">Cost to Acquire</div></div>
+            <div class="metric-card"><div class="metric-label">Rasio LTGP:CAC</div><div class="metric-value" id="k-ratio">—</div><div class="metric-sub">Target ≥ 3:1</div></div>
+            <div class="metric-card"><div class="metric-label">Gross Profit/Bulan</div><div class="metric-value green" id="k-gp">—</div><div class="metric-sub">Sebelum biaya iklan</div></div>
           </div>
-
           <div id="k-diagnosis"></div>
-
           <div class="card" style="margin-top:0">
             <div class="card-title">🔢 Formula Hormozi</div>
-            <div class="formula-box">
-              <div class="formula">LTGP = (Harga − Biaya) × Bulan + Upsell</div>
-              <div class="formula-desc">Total keuntungan bersih dari 1 customer seumur hidup</div>
-            </div>
-            <div class="formula-box">
-              <div class="formula">CAC = Biaya Iklan ÷ Customer Baru</div>
-              <div class="formula-desc">Biaya mendapatkan 1 customer baru</div>
-            </div>
-            <div class="formula-box" style="border-color:rgba(240,192,64,0.4)">
-              <div class="formula" style="color:var(--accent)">LTGP : CAC ≥ 3 : 1</div>
-              <div class="formula-desc">Di bawah ini: perbaiki dulu. Di atas ini: scale sekarang!</div>
-            </div>
+            <div class="formula-box"><div class="formula">LTGP = (Harga − Biaya) × Bulan + Upsell</div><div class="formula-desc">Total keuntungan bersih dari 1 customer seumur hidup</div></div>
+            <div class="formula-box"><div class="formula">CAC = Biaya Iklan ÷ Customer Baru</div><div class="formula-desc">Biaya mendapatkan 1 customer baru</div></div>
+            <div class="formula-box" style="border-color:rgba(240,192,64,0.4)"><div class="formula" style="color:var(--accent)">LTGP : CAC ≥ 3 : 1</div><div class="formula-desc">Di bawah ini: perbaiki dulu. Di atas ini: scale sekarang!</div></div>
           </div>
         </div>
       </div>
@@ -1203,7 +586,6 @@
         <h2>Script Generator</h2>
         <p>Generate script outreach menggunakan Value Equation &amp; framework ACA dari Hormozi.</p>
       </div>
-
       <div class="grid2">
         <div class="card">
           <div class="card-title"><div class="icon" style="background:var(--amber-bg)">✏️</div>Data Penawaran</div>
@@ -1226,48 +608,24 @@
           </select>
           <button class="btn btn-accent btn-full" onclick="generateScript()">⚡ Generate Script</button>
         </div>
-
         <div>
           <div class="card">
             <div class="card-title"><div class="icon" style="background:var(--green-bg)">🗣️</div>Framework ACA</div>
             <div class="step-list">
-              <div class="step-item">
-                <div class="step-num green">A</div>
-                <div class="step-body"><h3>Acknowledge</h3><p>Akui apa yang mereka katakan. Ulangi dengan kata-katamu sendiri.</p></div>
-              </div>
-              <div class="step-item">
-                <div class="step-num green">C</div>
-                <div class="step-body"><h3>Compliment</h3><p>Puji mereka. Kaitkan ke karakter positif jika bisa.</p></div>
-              </div>
-              <div class="step-item">
-                <div class="step-num green">A</div>
-                <div class="step-body"><h3>Ask</h3><p>Ajukan pertanyaan yang mengarahkan ke arah penawaranmu.</p></div>
-              </div>
+              <div class="step-item"><div class="step-num green">A</div><div class="step-body"><h3>Acknowledge</h3><p>Akui apa yang mereka katakan. Ulangi dengan kata-katamu sendiri.</p></div></div>
+              <div class="step-item"><div class="step-num green">C</div><div class="step-body"><h3>Compliment</h3><p>Puji mereka. Kaitkan ke karakter positif jika bisa.</p></div></div>
+              <div class="step-item"><div class="step-num green">A</div><div class="step-body"><h3>Ask</h3><p>Ajukan pertanyaan yang mengarahkan ke arah penawaranmu.</p></div></div>
             </div>
           </div>
-
           <div class="card">
             <div class="card-title"><div class="icon" style="background:var(--blue-bg)">💡</div>Value Equation</div>
-            <div class="info-row">
-              <span class="info-label">Dream Outcome</span>
-              <span class="tag tag-amber">Maksimalkan</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Peluang Sukses</span>
-              <span class="tag tag-amber">Maksimalkan</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Waktu untuk Hasil</span>
-              <span class="tag tag-green">Minimalisir</span>
-            </div>
-            <div class="info-row">
-              <span class="info-label">Usaha &amp; Pengorbanan</span>
-              <span class="tag tag-green">Minimalisir</span>
-            </div>
+            <div class="info-row"><span class="info-label">Dream Outcome</span><span class="tag tag-amber">Maksimalkan</span></div>
+            <div class="info-row"><span class="info-label">Peluang Sukses</span><span class="tag tag-amber">Maksimalkan</span></div>
+            <div class="info-row"><span class="info-label">Waktu untuk Hasil</span><span class="tag tag-green">Minimalisir</span></div>
+            <div class="info-row"><span class="info-label">Usaha &amp; Pengorbanan</span><span class="tag tag-green">Minimalisir</span></div>
           </div>
         </div>
       </div>
-
       <div id="script-result" style="display:none" class="card">
         <div class="card-title" style="color:var(--green)">✅ Script Siap Digunakan</div>
         <div id="script-output" class="output-box"></div>
@@ -1283,73 +641,108 @@
         <p>100 tindakan × 100 hari = jaminan Hormozi untuk lebih banyak engaged leads.</p>
       </div>
 
+      <!-- PANDUAN RULE OF 100 -->
+      <div class="card" style="border-color:rgba(240,192,64,0.2);background:linear-gradient(135deg,#1a1a0e,#111118)">
+        <div class="card-title" style="cursor:pointer" onclick="togglePanduan('panduan-r100')">
+          <div class="icon" style="background:var(--amber-bg)">📚</div>
+          Panduan Rule of 100
+          <span id="panduan-r100-toggle" style="margin-left:auto;font-size:14px;color:var(--text3)">▼ Buka</span>
+        </div>
+        <div id="panduan-r100" style="display:none">
+          <div class="panduan-section">
+            <h3>🔥 Apa itu Rule of 100?</h3>
+            <p>Rule of 100 adalah komitmen Hormozi: <em>"Lakukan 100 tindakan utama SETIAP HARI, selama 100 HARI berturut-turut, di salah satu Core Four. Siapapun yang melakukannya DIJAMIN mendapat lebih banyak engaged leads."</em></p>
+          </div>
+          <div class="panduan-section">
+            <h3>⚡ Cara Menggunakan Tracker Ini</h3>
+            <ol>
+              <li>Pilih mode Core Four yang sedang kamu jalankan (tab di atas)</li>
+              <li>Masukkan angka aktivitas hari ini menggunakan slider atau input angka</li>
+              <li>Klik <strong>Catat Hari Ini</strong> — satu hari = satu tanggal kalender. Jika kamu mencatat dua kali di hari yang sama, data akan diperbarui (bukan ditambah)</li>
+              <li>Klik ✏️ pada history untuk mengedit data hari yang sudah lalu jika ada kesalahan</li>
+              <li>Klik 🗑️ untuk menghapus entry tertentu</li>
+            </ol>
+            <div class="panduan-tip">💡 <strong>Fix Bug:</strong> Setiap tanggal dihitung SEKALI. Jika kamu menambah data di hari yang sama, angkanya diperbarui — hari tidak bertambah dobel.</div>
+          </div>
+          <div class="panduan-section">
+            <h3>📊 Target per Mode</h3>
+            <ul>
+              <li><strong>🟡 Warm Outreach:</strong> 100 pesan/call/DM ke orang yang sudah kenal per hari</li>
+              <li><strong>🟢 Post Konten:</strong> 100 menit membuat & mempublish konten per hari (minimal 1 post)</li>
+              <li><strong>🔵 Cold Outreach:</strong> 100 email/DM/call ke orang asing per hari</li>
+              <li><strong>🟠 Paid Ads:</strong> 100 menit kerja mengoptimalkan kampanye berbayar per hari</li>
+            </ul>
+          </div>
+          <div class="panduan-section">
+            <h3>🏆 Cara Menghitung Streak</h3>
+            <p>Streak = hari berturut-turut dengan aksi ≥ 100. Jika ada 1 hari yang di bawah 100 atau tidak dicatat, streak direset ke 0. Tujuannya bukan sempurna, tapi konsisten.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODE SELECTOR -->
       <div class="card">
         <div class="card-title">Pilih Mode Core Four</div>
         <div class="tab-group">
-          <button class="tab active" onclick="setR100Mode('warm',this)">🟡 Warm Outreach</button>
-          <button class="tab" onclick="setR100Mode('content',this)">🟢 Post Konten</button>
-          <button class="tab" onclick="setR100Mode('cold',this)">🔵 Cold Outreach</button>
-          <button class="tab" onclick="setR100Mode('ads',this)">🟠 Paid Ads</button>
+          <button class="tab active" id="r100-tab-warm" onclick="setR100Mode('warm',this)">🟡 Warm Outreach</button>
+          <button class="tab" id="r100-tab-content" onclick="setR100Mode('content',this)">🟢 Post Konten</button>
+          <button class="tab" id="r100-tab-cold" onclick="setR100Mode('cold',this)">🔵 Cold Outreach</button>
+          <button class="tab" id="r100-tab-ads" onclick="setR100Mode('ads',this)">🟠 Paid Ads</button>
         </div>
         <div id="r100-desc" class="output-box">100 warm outreach per hari (pesan, telepon, DM ke orang yang kamu kenal). Target: 100 hari berturut-turut tanpa skip.</div>
       </div>
 
       <div class="grid2">
         <div class="card">
-          <div class="card-title">🔥 Progress Hari Ini</div>
+          <div class="card-title">🔥 Input Hari Ini</div>
+          <div style="margin-bottom:14px">
+            <label>Tanggal</label>
+            <input type="date" id="r100-date" style="max-width:200px">
+          </div>
           <div class="slider-row">
             <label id="r100-slider-label">Jumlah outreach</label>
             <input type="range" min="0" max="150" value="0" step="1" id="r100-slider" oninput="updateR100()">
             <span class="slider-val" id="r100-val">0</span>
           </div>
-          <div class="progress-bar"><div class="progress-fill" id="r100-progress" style="width:0%"></div></div>
-          <div class="progress-label">
-            <span id="r100-pct-text">0%</span>
-            <span>Target: 100</span>
+          <div style="margin-bottom:12px">
+            <label>Atau masukkan angka langsung</label>
+            <input type="number" id="r100-input-num" min="0" max="999" placeholder="0" oninput="syncR100Input()" style="max-width:120px;margin-bottom:0">
           </div>
-
+          <div class="progress-bar"><div class="progress-fill" id="r100-progress" style="width:0%"></div></div>
+          <div class="progress-label"><span id="r100-pct-text">0%</span><span>Target: 100</span></div>
           <div class="big-counter" id="r100-big">0</div>
           <div class="counter-label" id="r100-counter-label">dari target 100 hari ini</div>
-
-          <button class="btn btn-accent btn-full" style="margin-top:20px" onclick="logR100Day()">✅ Catat Hari Ini</button>
+          <div style="margin-bottom:12px;margin-top:16px">
+            <label>Catatan (opsional)</label>
+            <textarea id="r100-note" placeholder="Hambatan, insight, atau refleksi hari ini..." style="min-height:60px;margin-bottom:0"></textarea>
+          </div>
+          <button class="btn btn-accent btn-full" onclick="logR100Day()">✅ Catat Hari Ini</button>
+          <div id="r100-save-msg" style="display:none;margin-top:10px;font-size:14px;font-weight:700;color:var(--green);text-align:center"></div>
         </div>
 
         <div>
           <div class="metrics-grid">
-            <div class="metric-card">
-              <div class="metric-label">Hari Selesai (≥100)</div>
-              <div class="metric-value green" id="r100-days">0</div>
-              <div class="metric-sub">dari 100 hari</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Total Aksi</div>
-              <div class="metric-value amber" id="r100-total">0</div>
-              <div class="metric-sub">kumulatif</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Hari Tersisa</div>
-              <div class="metric-value" id="r100-remain">100</div>
-              <div class="metric-sub">untuk selesai</div>
-            </div>
-            <div class="metric-card">
-              <div class="metric-label">Streak Tertinggi</div>
-              <div class="metric-value blue" id="r100-streak">0</div>
-              <div class="metric-sub">hari berturut</div>
-            </div>
+            <div class="metric-card"><div class="metric-label">Hari Selesai (≥100)</div><div class="metric-value green" id="r100-days">0</div><div class="metric-sub">dari 100 target</div></div>
+            <div class="metric-card"><div class="metric-label">Total Aksi</div><div class="metric-value amber" id="r100-total">0</div><div class="metric-sub">kumulatif</div></div>
+            <div class="metric-card"><div class="metric-label">Hari Tersisa</div><div class="metric-value" id="r100-remain">100</div><div class="metric-sub">untuk selesai</div></div>
+            <div class="metric-card"><div class="metric-label">Streak Tertinggi</div><div class="metric-value blue" id="r100-streak">0</div><div class="metric-sub">hari berturut</div></div>
           </div>
-
           <div class="card">
             <div class="card-title">📜 Janji Hormozi</div>
-            <p style="font-size:16px;font-weight:700;color:var(--text2);line-height:1.8;font-style:italic">
-              "Jika kamu melakukan 100 tindakan utama per hari, dan kamu melakukannya 100 hari berturut-turut, kamu AKAN mendapatkan lebih banyak engaged leads. Ini bukan teori. Ini jaminan."
-            </p>
+            <p style="font-size:16px;font-weight:700;color:var(--text2);line-height:1.8;font-style:italic">"Jika kamu melakukan 100 tindakan utama per hari, dan kamu melakukannya 100 hari berturut-turut, kamu AKAN mendapatkan lebih banyak engaged leads. Ini bukan teori. Ini jaminan."</p>
             <p style="font-size:14px;font-weight:800;color:var(--text3);margin-top:10px">— Alex Hormozi, $100M Leads</p>
           </div>
+        </div>
+      </div>
 
-          <div class="card">
-            <div class="card-title">📋 5 Hari Terakhir</div>
-            <div id="r100-log" style="font-size:14px;font-weight:700;color:var(--text3);line-height:2">Belum ada catatan.</div>
-          </div>
+      <!-- HISTORY RULE OF 100 -->
+      <div class="card">
+        <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
+          <span><div class="icon" style="background:var(--amber-bg);display:inline-flex">📋</div> History Rule of 100 — Mode: <span id="r100-mode-label" style="color:var(--accent);margin-left:6px">Warm Outreach</span></span>
+          <button class="btn btn-sm btn-red" onclick="clearR100History()" style="font-size:12px">🗑️ Hapus Semua</button>
+        </div>
+        <div id="r100-history-container">
+          <div class="empty-state"><div class="empty-icon">🔥</div><div>Belum ada catatan. Mulai Rule of 100 hari ini!</div></div>
         </div>
       </div>
     </div>
@@ -1361,55 +754,26 @@
         <h2>Roadmap Advertising-ku</h2>
         <p>Checklist 3 fase untuk membangun mesin leads dari nol hingga $100M.</p>
       </div>
-
       <div class="metrics-grid">
-        <div class="metric-card">
-          <div class="metric-label">Total Progress</div>
-          <div class="metric-value amber" id="rm-total">0%</div>
-          <div class="metric-sub">dari 18 item</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Fase 1 Selesai</div>
-          <div class="metric-value" id="rm-p1">0/7</div>
-          <div class="metric-sub">Pondasi</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Fase 2 Selesai</div>
-          <div class="metric-value" id="rm-p2">0/6</div>
-          <div class="metric-sub">Core Four</div>
-        </div>
-        <div class="metric-card">
-          <div class="metric-label">Fase 3 Selesai</div>
-          <div class="metric-value" id="rm-p3">0/5</div>
-          <div class="metric-sub">Scale</div>
-        </div>
+        <div class="metric-card"><div class="metric-label">Total Progress</div><div class="metric-value amber" id="rm-total">0%</div><div class="metric-sub">dari 18 item</div></div>
+        <div class="metric-card"><div class="metric-label">Fase 1 Selesai</div><div class="metric-value" id="rm-p1">0/7</div><div class="metric-sub">Pondasi</div></div>
+        <div class="metric-card"><div class="metric-label">Fase 2 Selesai</div><div class="metric-value" id="rm-p2">0/6</div><div class="metric-sub">Core Four</div></div>
+        <div class="metric-card"><div class="metric-label">Fase 3 Selesai</div><div class="metric-value" id="rm-p3">0/5</div><div class="metric-sub">Scale</div></div>
       </div>
-
       <div class="card">
-        <div class="card-title">
-          <div class="icon" style="background:var(--amber-bg)">🏗️</div>
-          Fase 1 — Pondasi (Minggu 1–2)
-        </div>
+        <div class="card-title"><div class="icon" style="background:var(--amber-bg)">🏗️</div>Fase 1 — Pondasi (Minggu 1–2)</div>
         <div class="progress-bar"><div class="progress-fill" id="p1-bar" style="width:0%"></div></div>
         <div class="progress-label"><span id="p1-pct">0 / 7 selesai</span><span></span></div>
         <div class="checklist" id="phase1-list"></div>
       </div>
-
       <div class="card">
-        <div class="card-title">
-          <div class="icon" style="background:var(--blue-bg)">⚡</div>
-          Fase 2 — Core Four (Minggu 3–8)
-        </div>
-        <div class="progress-bar"><div class="progress-fill progress-fill.blue" id="p2-bar" style="width:0%;background:var(--blue)"></div></div>
+        <div class="card-title"><div class="icon" style="background:var(--blue-bg)">⚡</div>Fase 2 — Core Four (Minggu 3–8)</div>
+        <div class="progress-bar"><div class="progress-fill" id="p2-bar" style="width:0%;background:var(--blue)"></div></div>
         <div class="progress-label"><span id="p2-pct">0 / 6 selesai</span><span></span></div>
         <div class="checklist" id="phase2-list"></div>
       </div>
-
       <div class="card">
-        <div class="card-title">
-          <div class="icon" style="background:var(--green-bg)">🚀</div>
-          Fase 3 — Scale dengan Lead Getters (Bulan 3+)
-        </div>
+        <div class="card-title"><div class="icon" style="background:var(--green-bg)">🚀</div>Fase 3 — Scale dengan Lead Getters (Bulan 3+)</div>
         <div class="progress-bar"><div class="progress-fill" id="p3-bar" style="width:0%;background:var(--green)"></div></div>
         <div class="progress-label"><span id="p3-pct">0 / 5 selesai</span><span></span></div>
         <div class="checklist" id="phase3-list"></div>
@@ -1419,35 +783,92 @@
   </main>
 </div>
 
+<!-- EDIT MODAL -->
+<div id="edit-modal" class="modal-overlay" style="display:none" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-title" id="modal-title">Edit Data</div>
+    <div id="modal-body"></div>
+    <div class="modal-actions">
+      <button class="btn btn-accent" onclick="saveModalEdit()">💾 Simpan</button>
+      <button class="btn" onclick="closeModal()">Batal</button>
+    </div>
+  </div>
+</div>
+
 <script>
-/* ============ STATE ============ */
+/* =============================================
+   STATE & STORAGE
+   ============================================= */
 var state = {
   lmType: 'reveal',
   lmFormat: 'software',
   r100Mode: 'warm',
-  r100Days: 0,
-  r100Total: 0,
-  r100History: [],
   checks: { p1: [], p2: [], p3: [] }
 };
 
-/* ============ NAV ============ */
+var STORAGE_CF = '100ml_corefour_v2';
+var STORAGE_R100 = '100ml_rule100_v2';
+var STORAGE_ROADMAP = '100ml_roadmap_v2';
+
+function loadStorage(key, def) {
+  try { var v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch(e) { return def; }
+}
+function saveStorage(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+}
+
+/* CF History: array of { id, date (YYYY-MM-DD), warm, content, cold, ads, note } */
+var cfHistory = loadStorage(STORAGE_CF, []);
+/* R100 History per mode: { warm: [...], content: [...], cold: [...], ads: [...] }
+   Each entry: { id, date (YYYY-MM-DD), val, done, note } */
+var r100Data = loadStorage(STORAGE_R100, { warm: [], content: [], cold: [], ads: [] });
+var roadmapChecks = loadStorage(STORAGE_ROADMAP, { p1: [], p2: [], p3: [] });
+state.checks = roadmapChecks;
+
+/* current modal context */
+var modalCtx = {};
+
+/* =============================================
+   UTILS
+   ============================================= */
+function todayStr() {
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+function formatDate(str) {
+  if (!str) return '-';
+  var parts = str.split('-');
+  return parts[2] + '/' + parts[1] + '/' + parts[0];
+}
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
+/* =============================================
+   NAV
+   ============================================= */
 function showSection(id, el) {
   document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
   document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
   if (el) el.classList.add('active');
-  if (window.innerWidth <= 768) {
-    document.getElementById('sidebar').classList.remove('open');
-  }
+  if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('open');
   window.scrollTo(0, 0);
 }
-
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
+function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+function togglePanduan(id) {
+  var el = document.getElementById(id);
+  var toggle = document.getElementById(id + '-toggle');
+  var hidden = el.style.display === 'none';
+  el.style.display = hidden ? 'block' : 'none';
+  toggle.textContent = hidden ? '▲ Tutup' : '▼ Buka';
 }
 
-/* ============ CORE FOUR ============ */
+/* =============================================
+   CORE FOUR TRACKER
+   ============================================= */
+function initCFDate() {
+  document.getElementById('cf-date').value = todayStr();
+}
+
 function updateCF() {
   var w = parseInt(document.getElementById('in-warm').value) || 0;
   var c = parseInt(document.getElementById('in-content').value) || 0;
@@ -1459,20 +880,331 @@ function updateCF() {
   document.getElementById('cf-ads').textContent = a;
 
   var msgs = [];
-  if (w > 0) msgs.push((w >= 100 ? '✅' : '⚠️') + ' Warm outreach: ' + w + '/100' + (w >= 100 ? ' — TARGET TERCAPAI!' : ' — butuh ' + (100 - w) + ' lagi'));
-  if (c > 0) msgs.push((c >= 1 ? '✅' : '⚠️') + ' Konten: ' + c + ' post hari ini');
-  if (co > 0) msgs.push((co >= 100 ? '✅' : '⚠️') + ' Cold outreach: ' + co + '/100' + (co >= 100 ? ' — TARGET TERCAPAI!' : ' — butuh ' + (100 - co) + ' lagi'));
+  if (w > 0) msgs.push((w >= 100 ? '✅' : '⚠️') + ' Warm outreach: ' + w + '/100' + (w >= 100 ? ' — TARGET TERCAPAI!' : ' — butuh ' + (100-w) + ' lagi'));
+  if (c > 0) msgs.push((c >= 1 ? '✅' : '⚠️') + ' Konten: ' + c + ' post hari ini' + (c >= 1 ? ' — BAGUS!' : ''));
+  if (co > 0) msgs.push((co >= 100 ? '✅' : '⚠️') + ' Cold outreach: ' + co + '/100' + (co >= 100 ? ' — TARGET TERCAPAI!' : ' — butuh ' + (100-co) + ' lagi'));
   if (a > 0) msgs.push((a >= 100 ? '✅' : '⚠️') + ' Waktu iklan: ' + a + '/100 menit' + (a >= 100 ? ' — TARGET TERCAPAI!' : ''));
 
   var fb = document.getElementById('cf-feedback');
-  if (msgs.length > 0) {
-    fb.className = 'output-box';
-    fb.innerHTML = msgs.join('\n');
-    fb.style.display = 'block';
-  }
+  if (msgs.length > 0) { fb.className = 'output-box'; fb.textContent = msgs.join('\n'); fb.style.display = 'block'; }
+  else fb.style.display = 'none';
 }
 
-/* ============ LEAD MAGNET ============ */
+function saveCFDay() {
+  var date = document.getElementById('cf-date').value || todayStr();
+  var w = parseInt(document.getElementById('in-warm').value) || 0;
+  var c = parseInt(document.getElementById('in-content').value) || 0;
+  var co = parseInt(document.getElementById('in-cold').value) || 0;
+  var a = parseInt(document.getElementById('in-ads').value) || 0;
+  var note = document.getElementById('in-cf-note').value.trim();
+
+  /* Update if same date exists */
+  var existing = cfHistory.findIndex(function(h) { return h.date === date; });
+  var entry = { id: uid(), date: date, warm: w, content: c, cold: co, ads: a, note: note };
+  if (existing >= 0) {
+    entry.id = cfHistory[existing].id;
+    cfHistory[existing] = entry;
+  } else {
+    cfHistory.push(entry);
+  }
+  cfHistory.sort(function(a,b) { return b.date.localeCompare(a.date); });
+  saveStorage(STORAGE_CF, cfHistory);
+
+  /* Reset inputs */
+  document.getElementById('in-warm').value = '';
+  document.getElementById('in-content').value = '';
+  document.getElementById('in-cold').value = '';
+  document.getElementById('in-ads').value = '';
+  document.getElementById('in-cf-note').value = '';
+  document.getElementById('cf-date').value = todayStr();
+  updateCF();
+  renderCFHistory();
+
+  alert('✅ Data hari ' + formatDate(date) + ' berhasil disimpan!');
+}
+
+function renderCFHistory() {
+  var container = document.getElementById('cf-history-container');
+  if (cfHistory.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><div>Belum ada data tersimpan. Mulai catat aktivitasmu!</div></div>';
+    return;
+  }
+
+  var html = '<div style="overflow-x:auto"><table class="history-table"><thead><tr>';
+  html += '<th>Tanggal</th><th>Warm</th><th>Konten</th><th>Cold</th><th>Iklan (mnt)</th><th>Catatan</th><th>Aksi</th></tr></thead><tbody>';
+
+  cfHistory.forEach(function(h) {
+    var warm_ok = h.warm >= 100, cont_ok = h.content >= 1, cold_ok = h.cold >= 100, ads_ok = h.ads >= 100;
+    var achieved = [warm_ok, cont_ok, cold_ok, ads_ok].filter(Boolean).length;
+    var dotColor = achieved >= 3 ? 'green' : achieved >= 1 ? 'amber' : 'red';
+
+    html += '<tr>';
+    html += '<td><span class="status-dot ' + dotColor + '"></span><strong>' + formatDate(h.date) + '</strong></td>';
+    html += '<td>' + colorNum(h.warm, 100) + '</td>';
+    html += '<td>' + colorNum(h.content, 1) + '</td>';
+    html += '<td>' + colorNum(h.cold, 100) + '</td>';
+    html += '<td>' + colorNum(h.ads, 100) + '</td>';
+    html += '<td style="max-width:160px;font-size:13px;color:var(--text3)">' + (h.note ? h.note.substring(0,60) + (h.note.length>60?'...':'') : '—') + '</td>';
+    html += '<td class="td-actions"><button class="btn btn-sm btn-blue" onclick="editCFEntry(\'' + h.id + '\')">✏️</button> <button class="btn btn-sm btn-red" onclick="deleteCFEntry(\'' + h.id + '\')">🗑️</button></td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  container.innerHTML = html;
+}
+
+function colorNum(val, target) {
+  var color = val >= target ? 'var(--green)' : val > 0 ? 'var(--amber)' : 'var(--text3)';
+  return '<span style="color:' + color + ';font-weight:800">' + val + '</span>';
+}
+
+function editCFEntry(id) {
+  var h = cfHistory.find(function(x) { return x.id === id; });
+  if (!h) return;
+  modalCtx = { type: 'cf', id: id };
+  document.getElementById('modal-title').textContent = '✏️ Edit Data — ' + formatDate(h.date);
+  document.getElementById('modal-body').innerHTML =
+    '<label>Tanggal</label><input type="date" id="me-date" value="' + h.date + '">' +
+    '<label>Warm Outreach</label><input type="number" id="me-warm" value="' + h.warm + '" min="0">' +
+    '<label>Konten Dipost</label><input type="number" id="me-content" value="' + h.content + '" min="0">' +
+    '<label>Cold Outreach</label><input type="number" id="me-cold" value="' + h.cold + '" min="0">' +
+    '<label>Menit Iklan</label><input type="number" id="me-ads" value="' + h.ads + '" min="0">' +
+    '<label>Catatan</label><textarea id="me-note">' + (h.note || '') + '</textarea>';
+  document.getElementById('edit-modal').style.display = 'flex';
+}
+
+function deleteCFEntry(id) {
+  if (!confirm('Hapus data ini?')) return;
+  cfHistory = cfHistory.filter(function(h) { return h.id !== id; });
+  saveStorage(STORAGE_CF, cfHistory);
+  renderCFHistory();
+}
+
+function clearCFHistory() {
+  if (!confirm('Hapus SEMUA data Core Four? Ini tidak bisa di-undo.')) return;
+  cfHistory = [];
+  saveStorage(STORAGE_CF, cfHistory);
+  renderCFHistory();
+}
+
+/* =============================================
+   RULE OF 100 — FIXED
+   ============================================= */
+var r100Modes = {
+  warm:    { label: 'Jumlah warm outreach hari ini', desc: '100 warm outreach per hari (pesan, telepon, DM ke orang yang kamu kenal). Target: 100 hari berturut-turut tanpa skip.', name: 'Warm Outreach' },
+  content: { label: 'Menit membuat konten hari ini', desc: '100 menit per hari membuat konten. Publish minimal 1 konten per hari. Target: 100 hari berturut-turut.', name: 'Post Konten' },
+  cold:    { label: 'Jumlah cold outreach hari ini', desc: '100 cold outreach per hari (email, DM, telepon ke orang asing yang sesuai target market). Target: 100 hari berturut-turut.', name: 'Cold Outreach' },
+  ads:     { label: 'Menit kerja paid ads hari ini', desc: '100 menit per hari membuat dan mengoptimalkan paid ads. Jalankan kampanye selama 100 hari berturut-turut.', name: 'Paid Ads' }
+};
+
+function initR100Date() {
+  document.getElementById('r100-date').value = todayStr();
+}
+
+function setR100Mode(mode, btn) {
+  state.r100Mode = mode;
+  document.querySelectorAll('#rule100 .tab-group .tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('r100-slider-label').textContent = r100Modes[mode].label;
+  document.getElementById('r100-desc').textContent = r100Modes[mode].desc;
+  document.getElementById('r100-mode-label').textContent = r100Modes[mode].name;
+  updateR100Metrics();
+  renderR100History();
+}
+
+function updateR100() {
+  var val = parseInt(document.getElementById('r100-slider').value);
+  document.getElementById('r100-val').textContent = val;
+  document.getElementById('r100-big').textContent = val;
+  document.getElementById('r100-input-num').value = val;
+  var pct = Math.min(100, val);
+  document.getElementById('r100-progress').style.width = pct + '%';
+  document.getElementById('r100-pct-text').textContent = pct + '%';
+  document.getElementById('r100-counter-label').textContent = val >= 100 ? '🔥 TARGET HARI INI TERCAPAI!' : 'dari target 100 hari ini';
+}
+
+function syncR100Input() {
+  var val = Math.min(150, Math.max(0, parseInt(document.getElementById('r100-input-num').value) || 0));
+  document.getElementById('r100-slider').value = val;
+  updateR100();
+}
+
+function logR100Day() {
+  var date = document.getElementById('r100-date').value || todayStr();
+  var val = parseInt(document.getElementById('r100-slider').value);
+  var note = document.getElementById('r100-note').value.trim();
+  var mode = state.r100Mode;
+  var done = val >= 100;
+
+  if (!r100Data[mode]) r100Data[mode] = [];
+
+  /* KEY FIX: update if same date already exists — don't add new entry */
+  var existing = r100Data[mode].findIndex(function(h) { return h.date === date; });
+  var entry = { id: uid(), date: date, val: val, done: done, note: note };
+  var isUpdate = false;
+  if (existing >= 0) {
+    entry.id = r100Data[mode][existing].id;
+    r100Data[mode][existing] = entry;
+    isUpdate = true;
+  } else {
+    r100Data[mode].push(entry);
+  }
+
+  /* Sort by date ascending for streak calc */
+  r100Data[mode].sort(function(a, b) { return a.date.localeCompare(b.date); });
+  saveStorage(STORAGE_R100, r100Data);
+
+  /* Reset slider */
+  document.getElementById('r100-slider').value = 0;
+  document.getElementById('r100-input-num').value = '';
+  document.getElementById('r100-date').value = todayStr();
+  document.getElementById('r100-note').value = '';
+  updateR100();
+  updateR100Metrics();
+  renderR100History();
+
+  var msg = isUpdate
+    ? '🔄 Data hari ' + formatDate(date) + ' diperbarui!'
+    : '✅ Hari ' + formatDate(date) + ' berhasil dicatat!' + (done ? ' 🔥 TARGET TERCAPAI!' : '');
+  var msgEl = document.getElementById('r100-save-msg');
+  msgEl.textContent = msg;
+  msgEl.style.display = 'block';
+  setTimeout(function() { msgEl.style.display = 'none'; }, 3000);
+}
+
+function updateR100Metrics() {
+  var mode = state.r100Mode;
+  var hist = r100Data[mode] || [];
+
+  var daysCompleted = hist.filter(function(h) { return h.done; }).length;
+  var totalActions = hist.reduce(function(s, h) { return s + h.val; }, 0);
+
+  /* Current streak — consecutive days with done=true, counting backwards from today */
+  var maxStreak = 0, curStreak = 0;
+  hist.forEach(function(h) {
+    if (h.done) { curStreak++; if (curStreak > maxStreak) maxStreak = curStreak; }
+    else curStreak = 0;
+  });
+
+  document.getElementById('r100-days').textContent = daysCompleted;
+  document.getElementById('r100-total').textContent = totalActions;
+  document.getElementById('r100-remain').textContent = Math.max(0, 100 - daysCompleted);
+  document.getElementById('r100-streak').textContent = maxStreak;
+}
+
+function renderR100History() {
+  var mode = state.r100Mode;
+  var hist = (r100Data[mode] || []).slice().reverse(); /* newest first */
+  var container = document.getElementById('r100-history-container');
+
+  if (hist.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">🔥</div><div>Belum ada catatan. Mulai Rule of 100 hari ini!</div></div>';
+    return;
+  }
+
+  var html = '<div style="overflow-x:auto"><table class="history-table"><thead><tr>';
+  html += '<th>Hari</th><th>Tanggal</th><th>Aksi</th><th>Progress</th><th>Status</th><th>Catatan</th><th>Aksi</th></tr></thead><tbody>';
+
+  var sorted = (r100Data[mode] || []).slice().sort(function(a,b) { return a.date.localeCompare(b.date); });
+  var histWithDay = hist.map(function(h) {
+    var idx = sorted.findIndex(function(x) { return x.id === h.id; });
+    return { h: h, dayNum: idx + 1 };
+  });
+
+  histWithDay.forEach(function(item) {
+    var h = item.h;
+    var pct = Math.min(100, Math.round(h.val / 100 * 100));
+    var statusColor = h.done ? 'var(--green)' : h.val > 0 ? 'var(--amber)' : 'var(--red)';
+    var statusText = h.done ? '✅ Selesai' : h.val > 0 ? '⚠️ Kurang' : '❌ Skip';
+
+    html += '<tr>';
+    html += '<td><strong style="color:var(--accent)">Hari ' + item.dayNum + '</strong></td>';
+    html += '<td>' + formatDate(h.date) + '</td>';
+    html += '<td><strong style="color:' + statusColor + '">' + h.val + '</strong></td>';
+    html += '<td style="min-width:100px">';
+    html += '<div class="progress-bar" style="margin:0"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
+    html += '<div style="font-size:12px;color:var(--text3);margin-top:2px">' + pct + '%</div>';
+    html += '</td>';
+    html += '<td><span style="color:' + statusColor + ';font-weight:800">' + statusText + '</span></td>';
+    html += '<td style="max-width:140px;font-size:13px;color:var(--text3)">' + (h.note ? h.note.substring(0,50)+(h.note.length>50?'...':'') : '—') + '</td>';
+    html += '<td class="td-actions"><button class="btn btn-sm btn-blue" onclick="editR100Entry(\'' + h.id + '\')">✏️</button> <button class="btn btn-sm btn-red" onclick="deleteR100Entry(\'' + h.id + '\')">🗑️</button></td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  container.innerHTML = html;
+}
+
+function editR100Entry(id) {
+  var mode = state.r100Mode;
+  var h = (r100Data[mode] || []).find(function(x) { return x.id === id; });
+  if (!h) return;
+  modalCtx = { type: 'r100', id: id, mode: mode };
+  document.getElementById('modal-title').textContent = '✏️ Edit Data — ' + formatDate(h.date);
+  document.getElementById('modal-body').innerHTML =
+    '<label>Tanggal</label><input type="date" id="me-date" value="' + h.date + '">' +
+    '<label>' + r100Modes[mode].label + '</label><input type="number" id="me-r100-val" value="' + h.val + '" min="0">' +
+    '<label>Catatan</label><textarea id="me-r100-note">' + (h.note || '') + '</textarea>';
+  document.getElementById('edit-modal').style.display = 'flex';
+}
+
+function deleteR100Entry(id) {
+  if (!confirm('Hapus data hari ini?')) return;
+  var mode = state.r100Mode;
+  r100Data[mode] = (r100Data[mode] || []).filter(function(h) { return h.id !== id; });
+  saveStorage(STORAGE_R100, r100Data);
+  updateR100Metrics();
+  renderR100History();
+}
+
+function clearR100History() {
+  if (!confirm('Hapus SEMUA history mode ' + r100Modes[state.r100Mode].name + '? Ini tidak bisa di-undo.')) return;
+  r100Data[state.r100Mode] = [];
+  saveStorage(STORAGE_R100, r100Data);
+  updateR100Metrics();
+  renderR100History();
+}
+
+/* =============================================
+   MODAL
+   ============================================= */
+function saveModalEdit() {
+  if (modalCtx.type === 'cf') {
+    var h = cfHistory.find(function(x) { return x.id === modalCtx.id; });
+    if (h) {
+      h.date = document.getElementById('me-date').value;
+      h.warm = parseInt(document.getElementById('me-warm').value) || 0;
+      h.content = parseInt(document.getElementById('me-content').value) || 0;
+      h.cold = parseInt(document.getElementById('me-cold').value) || 0;
+      h.ads = parseInt(document.getElementById('me-ads').value) || 0;
+      h.note = document.getElementById('me-note').value.trim();
+      cfHistory.sort(function(a,b) { return b.date.localeCompare(a.date); });
+      saveStorage(STORAGE_CF, cfHistory);
+      renderCFHistory();
+    }
+  } else if (modalCtx.type === 'r100') {
+    var mode = modalCtx.mode;
+    var h2 = (r100Data[mode] || []).find(function(x) { return x.id === modalCtx.id; });
+    if (h2) {
+      h2.date = document.getElementById('me-date').value;
+      h2.val = parseInt(document.getElementById('me-r100-val').value) || 0;
+      h2.done = h2.val >= 100;
+      h2.note = document.getElementById('me-r100-note').value.trim();
+      r100Data[mode].sort(function(a,b) { return a.date.localeCompare(b.date); });
+      saveStorage(STORAGE_R100, r100Data);
+      updateR100Metrics();
+      renderR100History();
+    }
+  }
+  closeModal();
+}
+
+function closeModal() { document.getElementById('edit-modal').style.display = 'none'; modalCtx = {}; }
+function closeModalOutside(e) { if (e.target === document.getElementById('edit-modal')) closeModal(); }
+
+/* =============================================
+   LEAD MAGNET
+   ============================================= */
 function selectLMType(type, btn) {
   state.lmType = type;
   document.querySelectorAll('#lm-type-tabs .tab').forEach(function(b) { b.classList.remove('active'); });
@@ -1509,18 +1241,14 @@ function generateLM() {
   out += '🎯 MASALAH: ' + problem + '\n';
   out += '💎 TIPE: ' + types[state.lmType] + ' ' + avatar + '\n';
   out += '📦 FORMAT: ' + fmts[state.lmFormat] + '\n\n';
-  out += '───────────────────────────────────────\n';
-  out += '  STRUKTUR KONTEN\n';
-  out += '───────────────────────────────────────\n\n';
+  out += '───────────────────────────────────────\n  STRUKTUR KONTEN\n───────────────────────────────────────\n\n';
   out += '1. HOOK\n   "Apakah kamu [deskripsi masalah: ' + problem + ']?"\n\n';
   out += '2. ISI UTAMA\n   Berikan solusi nyata yang menyelesaikan:\n   "' + problem + '"\n   Buat cukup bagus sehingga orang merasa bodoh untuk tidak mengambilnya.\n\n';
   out += '3. PROBLEM-SOLUTION CYCLE\n   Setelah masalah ini terselesaikan, masalah baru muncul...\n   ...yang diselesaikan oleh: ' + core + '\n\n';
   out += '4. CALL TO ACTION\n   ' + cta + '\n';
   if (scarcity) out += '\n5. SCARCITY/URGENCY\n   ' + scarcity + '\n';
-  out += '\n───────────────────────────────────────\n';
-  out += '  CHECKLIST HORMOZI\n';
-  out += '───────────────────────────────────────\n\n';
-  out += '□ Assez berharga untuk dijual, tapi diberikan gratis\n';
+  out += '\n───────────────────────────────────────\n  CHECKLIST HORMOZI\n───────────────────────────────────────\n\n';
+  out += '□ Cukup berharga untuk dijual, tapi diberikan gratis\n';
   out += '□ Format: ' + fmts[state.lmFormat] + '\n';
   out += '□ Tersedia dalam 4 format (teks, video, audio, gambar)\n';
   out += '□ Nama sudah ditest ke audiens via polling\n';
@@ -1532,7 +1260,9 @@ function generateLM() {
   res.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-/* ============ KALKULATOR ============ */
+/* =============================================
+   KALKULATOR
+   ============================================= */
 function calcLTGP() {
   var price = parseFloat(document.getElementById('k-price').value) || 0;
   var cogs = parseFloat(document.getElementById('k-cogs').value) || 0;
@@ -1540,14 +1270,12 @@ function calcLTGP() {
   var adspend = parseFloat(document.getElementById('k-adspend').value) || 0;
   var newcust = parseFloat(document.getElementById('k-newcust').value) || 0;
   var upsell = parseFloat(document.getElementById('k-upsell').value) || 0;
-
   if (price === 0 || newcust === 0) return;
 
   var gp = (price - cogs) * newcust;
   var ltgp = (price - cogs) * months + upsell;
   var cac = newcust > 0 ? adspend / newcust : 0;
   var ratio = cac > 0 ? ltgp / cac : 0;
-
   var fmt = function(v) { return 'Rp ' + new Intl.NumberFormat('id-ID', { maximumFractionDigits: 0 }).format(v); };
 
   document.getElementById('k-gp').textContent = fmt(gp);
@@ -1560,24 +1288,17 @@ function calcLTGP() {
 
   var diag = document.getElementById('k-diagnosis');
   var cls, title, msg;
-  if (ratio >= 5) {
-    cls = 'excellent'; title = '🚀 LUAR BIASA — Scale Sekarang!';
-    msg = 'Rasio ' + ratio.toFixed(1) + ':1 jauh melampaui standar Hormozi. Investasikan sebanyak yang kamu bisa ke iklan. Ini adalah mesin cetak uang yang sudah terbukti.';
-  } else if (ratio >= 3) {
-    cls = 'good'; title = '✅ SIAP SCALE — LTGP:CAC ≥ 3:1';
-    msg = 'Rasio ' + ratio.toFixed(1) + ':1 sudah melampaui threshold Hormozi (3:1). Tingkatkan budget iklan dengan percaya diri. Setiap rupiah yang dimasukkan menghasilkan ' + ratio.toFixed(1) + 'x lipat.';
-  } else if (ratio >= 1) {
-    cls = 'warning'; title = '⚠️ PERLU PERBAIKAN — Di bawah 3:1';
-    msg = 'Rasio ' + ratio.toFixed(1) + ':1 masih di bawah target. Pilih satu: (1) Tingkatkan LTGP dengan membuat upsell atau meningkatkan retensi, atau (2) Kurangi CAC dengan perbaiki targeting iklan.';
-  } else {
-    cls = 'danger'; title = '🚫 JANGAN SCALE — Kamu sedang rugi';
-    msg = 'Rasio ' + ratio.toFixed(1) + ':1 berarti CAC lebih besar dari LTGP. Setiap customer baru = kerugian. Perbaiki offer, model bisnis, dan retensi dulu sebelum meningkatkan iklan.';
-  }
+  if (ratio >= 5) { cls = 'excellent'; title = '🚀 LUAR BIASA — Scale Sekarang!'; msg = 'Rasio ' + ratio.toFixed(1) + ':1 jauh melampaui standar Hormozi. Investasikan sebanyak yang kamu bisa ke iklan.'; }
+  else if (ratio >= 3) { cls = 'good'; title = '✅ SIAP SCALE — LTGP:CAC ≥ 3:1'; msg = 'Rasio ' + ratio.toFixed(1) + ':1 sudah melampaui threshold Hormozi (3:1). Tingkatkan budget iklan dengan percaya diri.'; }
+  else if (ratio >= 1) { cls = 'warning'; title = '⚠️ PERLU PERBAIKAN — Di bawah 3:1'; msg = 'Rasio ' + ratio.toFixed(1) + ':1 masih di bawah target. Pilih satu: (1) Tingkatkan LTGP atau (2) Kurangi CAC.'; }
+  else { cls = 'danger'; title = '🚫 JANGAN SCALE — Kamu sedang rugi'; msg = 'Rasio ' + ratio.toFixed(1) + ':1 berarti CAC lebih besar dari LTGP. Perbaiki offer dan retensi dulu.'; }
 
   diag.innerHTML = '<div class="diag-card ' + cls + '" style="display:block"><h3>' + title + '</h3><p>' + msg + '</p></div>';
 }
 
-/* ============ SCRIPT GENERATOR ============ */
+/* =============================================
+   SCRIPT GENERATOR
+   ============================================= */
 function generateScript() {
   var target = document.getElementById('s-target').value || 'pemilik bisnis';
   var outcome = document.getElementById('s-outcome').value || 'hasil luar biasa';
@@ -1587,17 +1308,14 @@ function generateScript() {
   var type = document.getElementById('s-type').value;
 
   var scripts = {
-    'warm': 'Hei [Nama]! Gimana kabar?\n\n[Personalisasi: sebutkan sesuatu yang kamu tahu tentang mereka, misal: "Lihat kamu baru buka cabang baru, keren!"]\n\nOmong-omong, aku lagi nyari ' + target + ' untuk aku bantu [' + outcome + '] dalam ' + time + ', ' + effort + '.\n\nAku baru bantu ' + proof + '. Aku mau ambil 5 case study lagi GRATIS — cuma minta testimonial kalau hasilnya bagus.\n\nKamu kenal siapa yang mungkin tertarik?\n\n[Jika mereka bilang tidak tahu]\n"Haha oke, kalau orang yang kamu benci? 😄"\n\n[Jika mereka sendiri tertarik]\n"Wah kebetulan! Boleh aku jelasin 3 menit gimana ini bisa work buat bisnis kamu?"',
-
-    'cold-email': 'Subject: ' + target + ' di [KOTA] — [hasil spesifik] dalam ' + time + '\n\nHei [Nama],\n\nAku lihat [sesuatu spesifik tentang bisnis mereka dari riset cepat] dan terkesan dengan [hal positif spesifik].\n\nAku spesialisasi membantu ' + target + ' mendapatkan [' + outcome + '] dalam ' + time + ', ' + effort + '.\n\n' + proof + '.\n\nAku yakin hasil ini bisa terjadi untuk bisnis kamu juga — dan aku ingin tunjukkan GRATIS, tanpa kewajiban apapun.\n\nApakah ada 15 menit untuk panggilan singkat minggu ini?\n\nBest,\n[Nama Kamu]\nP.S. Kalau timing-nya kurang tepat, boleh aku follow up bulan depan?',
-
-    'cold-dm': 'Hei [Nama] 👋\n\nNemuin profil kamu dan perhatiin [hal spesifik yang kamu lihat — post, produk, konten mereka].\n\nAku bantu ' + target + ' untuk [' + outcome + '] dalam ' + time + ', ' + effort + '.\n\n' + proof + '.\n\nBoleh aku share bagaimana kami melakukannya? 100% gratis, tidak ada komitmen apapun — cuma mau tunjukkan apakah ini relevan buat kamu.',
-
-    'offer': 'Aku lagi cari 5 ' + target + ' untuk mencapai [' + outcome + '] dalam ' + time + '.\n\nKamu tidak perlu ' + effort + '.\n\n' + proof + '.\n\n🔒 GARANSI: Kalau kamu tidak dapat hasilnya, aku kerja gratis sampai dapat — atau uang kembali 100%.\n\n⚠️ Aku batasi 5 orang karena aku ingin kasih perhatian penuh ke setiap klien.\n\nKalau tertarik, balas "YA" atau klik link di bio untuk booking konsultasi gratis.\n\nWaktu terbatas — slot bulan ini hampir penuh.'
+    'warm': 'Hei [Nama]! Gimana kabar?\n\n[Personalisasi: sebutkan sesuatu yang kamu tahu tentang mereka]\n\nOmong-omong, aku lagi nyari ' + target + ' untuk aku bantu [' + outcome + '] dalam ' + time + ', ' + effort + '.\n\nAku baru bantu ' + proof + '. Aku mau ambil 5 case study lagi GRATIS — cuma minta testimonial kalau hasilnya bagus.\n\nKamu kenal siapa yang mungkin tertarik?\n\n[Jika mereka bilang tidak tahu]\n"Haha oke, kalau orang yang kamu benci? 😄"\n\n[Jika mereka sendiri tertarik]\n"Wah kebetulan! Boleh aku jelasin 3 menit gimana ini bisa work buat bisnis kamu?"',
+    'cold-email': 'Subject: ' + target + ' di [KOTA] — [hasil spesifik] dalam ' + time + '\n\nHei [Nama],\n\nAku lihat [sesuatu spesifik tentang bisnis mereka] dan terkesan dengan [hal positif].\n\nAku spesialisasi membantu ' + target + ' mendapatkan [' + outcome + '] dalam ' + time + ', ' + effort + '.\n\n' + proof + '.\n\nAku yakin hasil ini bisa terjadi untuk bisnis kamu juga — dan aku ingin tunjukkan GRATIS, tanpa kewajiban apapun.\n\nApakah ada 15 menit untuk panggilan singkat minggu ini?\n\nBest,\n[Nama Kamu]\nP.S. Kalau timing-nya kurang tepat, boleh aku follow up bulan depan?',
+    'cold-dm': 'Hei [Nama] 👋\n\nNemuin profil kamu dan perhatiin [hal spesifik].\n\nAku bantu ' + target + ' untuk [' + outcome + '] dalam ' + time + ', ' + effort + '.\n\n' + proof + '.\n\nBoleh aku share bagaimana kami melakukannya? 100% gratis, tidak ada komitmen.',
+    'offer': 'Aku lagi cari 5 ' + target + ' untuk mencapai [' + outcome + '] dalam ' + time + '.\n\nKamu tidak perlu ' + effort + '.\n\n' + proof + '.\n\n🔒 GARANSI: Kalau kamu tidak dapat hasilnya, aku kerja gratis sampai dapat — atau uang kembali 100%.\n\n⚠️ Aku batasi 5 orang karena aku ingin kasih perhatian penuh ke setiap klien.\n\nKalau tertarik, balas "YA" atau klik link di bio untuk booking konsultasi gratis.'
   };
 
-  var res = document.getElementById('script-result');
   document.getElementById('script-output').textContent = scripts[type];
+  var res = document.getElementById('script-result');
   res.style.display = 'block';
   res.scrollIntoView({ behavior: 'smooth' });
 }
@@ -1611,59 +1329,9 @@ function copyScript() {
   });
 }
 
-/* ============ RULE OF 100 ============ */
-var r100Modes = {
-  warm: { label: 'Jumlah warm outreach hari ini', desc: '100 warm outreach per hari (pesan, telepon, DM ke orang yang kamu kenal). Target: 100 hari berturut-turut tanpa skip.' },
-  content: { label: 'Menit membuat konten hari ini', desc: '100 menit per hari membuat konten. Publish minimal 1 konten per hari. Target: 100 hari berturut-turut.' },
-  cold: { label: 'Jumlah cold outreach hari ini', desc: '100 cold outreach per hari (email, DM, telepon ke orang asing yang sesuai target market). Target: 100 hari berturut-turut.' },
-  ads: { label: 'Menit kerja paid ads hari ini', desc: '100 menit per hari membuat dan mengoptimalkan paid ads. Jalankan kampanye selama 100 hari berturut-turut.' }
-};
-
-function setR100Mode(mode, btn) {
-  state.r100Mode = mode;
-  document.querySelectorAll('#rule100 .tab-group .tab').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.getElementById('r100-slider-label').textContent = r100Modes[mode].label;
-  document.getElementById('r100-desc').textContent = r100Modes[mode].desc;
-}
-
-function updateR100() {
-  var val = parseInt(document.getElementById('r100-slider').value);
-  document.getElementById('r100-val').textContent = val;
-  document.getElementById('r100-big').textContent = val;
-  var pct = Math.min(100, val);
-  document.getElementById('r100-progress').style.width = pct + '%';
-  document.getElementById('r100-pct-text').textContent = pct + '%';
-  document.getElementById('r100-counter-label').textContent = val >= 100 ? '🔥 TARGET HARI INI TERCAPAI!' : 'dari target 100 hari ini';
-}
-
-function logR100Day() {
-  var val = parseInt(document.getElementById('r100-slider').value);
-  var done = val >= 100;
-  if (done) state.r100Days++;
-  state.r100Total += val;
-  state.r100History.push({ day: state.r100History.length + 1, val: val, done: done });
-
-  var maxStreak = 0, cur = 0;
-  state.r100History.forEach(function(h) {
-    if (h.done) { cur++; if (cur > maxStreak) maxStreak = cur; } else cur = 0;
-  });
-
-  document.getElementById('r100-days').textContent = state.r100Days;
-  document.getElementById('r100-total').textContent = state.r100Total;
-  document.getElementById('r100-remain').textContent = Math.max(0, 100 - state.r100Days);
-  document.getElementById('r100-streak').textContent = maxStreak;
-
-  var log = state.r100History.slice(-5).reverse().map(function(h) {
-    return 'Hari ' + h.day + ': ' + h.val + ' aksi ' + (h.done ? '✅' : '❌');
-  }).join('\n');
-  document.getElementById('r100-log').textContent = log;
-
-  document.getElementById('r100-slider').value = 0;
-  updateR100();
-}
-
-/* ============ ROADMAP / CHECKLIST ============ */
+/* =============================================
+   ROADMAP / CHECKLIST
+   ============================================= */
 var phase1Items = [
   'Tentukan Grand Slam Offer yang akan dijual',
   'Buat lead magnet yang sangat berharga (gratis)',
@@ -1673,7 +1341,6 @@ var phase1Items = [
   'Buat landing page sederhana untuk lead magnet',
   'Tetapkan target harian: berapa engaged leads yang dibutuhkan'
 ];
-
 var phase2Items = [
   'Warm outreach 100 orang/hari selama 30 hari pertama',
   'Publish minimal 1 konten per hari di platform utama',
@@ -1682,7 +1349,6 @@ var phase2Items = [
   'Hitung dan monitor LTGP:CAC setiap minggu',
   'Terapkan Rule of 100 di salah satu Core Four'
 ];
-
 var phase3Items = [
   'Setup sistem referral aktif untuk customers puas',
   'Rekrut dan latih tim sales / outreach pertama',
@@ -1701,6 +1367,7 @@ function buildChecklist(items, containerId, barId, pctId, phase, countId) {
     div.innerHTML = '<div class="check-circle' + (done ? ' done' : '') + '"></div><span class="check-text">' + item + '</span>';
     div.onclick = function() {
       state.checks[phase][i] = !state.checks[phase][i];
+      saveStorage(STORAGE_ROADMAP, state.checks);
       buildChecklist(items, containerId, barId, pctId, phase, countId);
       updateRoadmapMetrics();
     };
@@ -1720,10 +1387,18 @@ function updateRoadmapMetrics() {
   document.getElementById('rm-total').textContent = Math.round(total / 18 * 100) + '%';
 }
 
-/* ============ INIT ============ */
+/* =============================================
+   INIT
+   ============================================= */
+initCFDate();
+initR100Date();
+renderCFHistory();
+updateR100Metrics();
+renderR100History();
 buildChecklist(phase1Items, 'phase1-list', 'p1-bar', 'p1-pct', 'p1', 'rm-p1');
 buildChecklist(phase2Items, 'phase2-list', 'p2-bar', 'p2-pct', 'p2', 'rm-p2');
 buildChecklist(phase3Items, 'phase3-list', 'p3-bar', 'p3-pct', 'p3', 'rm-p3');
+updateRoadmapMetrics();
 updateR100();
 </script>
 </body>
