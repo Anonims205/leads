@@ -638,7 +638,7 @@
       <div class="page-header">
         <div class="breadcrumb">Tools · Komitmen</div>
         <h2>Rule of 100 Tracker</h2>
-        <p>100 tindakan × 100 hari = jaminan Hormozi untuk lebih banyak engaged leads.</p>
+        <p>100 tindakan/hari dari 4 Core Four digabung — 100 hari berturut-turut = jaminan Hormozi.</p>
       </div>
 
       <!-- PANDUAN RULE OF 100 -->
@@ -651,68 +651,75 @@
         <div id="panduan-r100" style="display:none">
           <div class="panduan-section">
             <h3>🔥 Apa itu Rule of 100?</h3>
-            <p>Rule of 100 adalah komitmen Hormozi: <em>"Lakukan 100 tindakan utama SETIAP HARI, selama 100 HARI berturut-turut, di salah satu Core Four. Siapapun yang melakukannya DIJAMIN mendapat lebih banyak engaged leads."</em></p>
+            <p>Rule of 100 adalah komitmen Hormozi: lakukan <strong>100 tindakan total per hari</strong> dari kombinasi 4 Core Four, selama <strong>100 hari berturut-turut</strong>. Tindakan dari semua mode <strong>digabung</strong> — yang penting totalnya ≥ 100 setiap hari.</p>
           </div>
           <div class="panduan-section">
             <h3>⚡ Cara Menggunakan Tracker Ini</h3>
             <ol>
-              <li>Pilih mode Core Four yang sedang kamu jalankan (tab di atas)</li>
-              <li>Masukkan angka aktivitas hari ini menggunakan slider atau input angka</li>
-              <li>Klik <strong>Catat Hari Ini</strong> — satu hari = satu tanggal kalender. Jika kamu mencatat dua kali di hari yang sama, data akan diperbarui (bukan ditambah)</li>
-              <li>Klik ✏️ pada history untuk mengedit data hari yang sudah lalu jika ada kesalahan</li>
-              <li>Klik 🗑️ untuk menghapus entry tertentu</li>
+              <li>Isi angka aktivitas masing-masing Core Four untuk hari ini</li>
+              <li>Total otomatis dijumlahkan — jika ≥ 100, hari itu SELESAI ✅</li>
+              <li>Klik <strong>Catat Hari Ini</strong> — satu tanggal = satu entry. Catat ulang di hari yang sama = data diperbarui</li>
+              <li>Klik ✏️ untuk edit data lama, 🗑️ untuk hapus</li>
             </ol>
-            <div class="panduan-tip">💡 <strong>Fix Bug:</strong> Setiap tanggal dihitung SEKALI. Jika kamu menambah data di hari yang sama, angkanya diperbarui — hari tidak bertambah dobel.</div>
+            <div class="panduan-tip">💡 Contoh: 40 Warm + 0 Konten + 30 Cold + 30 menit Ads = <strong>100 total ✅</strong>. Bebas kombinasi asal totalnya 100!</div>
           </div>
           <div class="panduan-section">
-            <h3>📊 Target per Mode</h3>
+            <h3>📊 Referensi Tiap Mode</h3>
             <ul>
-              <li><strong>🟡 Warm Outreach:</strong> 100 pesan/call/DM ke orang yang sudah kenal per hari</li>
-              <li><strong>🟢 Post Konten:</strong> 100 menit membuat & mempublish konten per hari (minimal 1 post)</li>
-              <li><strong>🔵 Cold Outreach:</strong> 100 email/DM/call ke orang asing per hari</li>
-              <li><strong>🟠 Paid Ads:</strong> 100 menit kerja mengoptimalkan kampanye berbayar per hari</li>
+              <li><strong>🟡 Warm Outreach:</strong> pesan/call/DM ke orang yang sudah kenal</li>
+              <li><strong>🟢 Post Konten:</strong> menit membuat & mempublish konten</li>
+              <li><strong>🔵 Cold Outreach:</strong> email/DM/call ke orang asing</li>
+              <li><strong>🟠 Paid Ads:</strong> menit kerja mengoptimalkan kampanye berbayar</li>
             </ul>
           </div>
           <div class="panduan-section">
-            <h3>🏆 Cara Menghitung Streak</h3>
-            <p>Streak = hari berturut-turut dengan aksi ≥ 100. Jika ada 1 hari yang di bawah 100 atau tidak dicatat, streak direset ke 0. Tujuannya bukan sempurna, tapi konsisten.</p>
+            <h3>🏆 Streak &amp; Hari Selesai</h3>
+            <p>Hari dihitung SELESAI jika total ≥ 100. Streak = hari berturut-turut selesai. Jika satu hari bolong atau di bawah 100, streak kembali ke 0.</p>
           </div>
         </div>
       </div>
 
-      <!-- MODE SELECTOR -->
-      <div class="card">
-        <div class="card-title">Pilih Mode Core Four</div>
-        <div class="tab-group">
-          <button class="tab active" id="r100-tab-warm" onclick="setR100Mode('warm',this)">🟡 Warm Outreach</button>
-          <button class="tab" id="r100-tab-content" onclick="setR100Mode('content',this)">🟢 Post Konten</button>
-          <button class="tab" id="r100-tab-cold" onclick="setR100Mode('cold',this)">🔵 Cold Outreach</button>
-          <button class="tab" id="r100-tab-ads" onclick="setR100Mode('ads',this)">🟠 Paid Ads</button>
-        </div>
-        <div id="r100-desc" class="output-box">100 warm outreach per hari (pesan, telepon, DM ke orang yang kamu kenal). Target: 100 hari berturut-turut tanpa skip.</div>
-      </div>
-
       <div class="grid2">
+        <!-- INPUT KIRI -->
         <div class="card">
           <div class="card-title">🔥 Input Hari Ini</div>
           <div style="margin-bottom:14px">
             <label>Tanggal</label>
             <input type="date" id="r100-date" style="max-width:200px">
           </div>
-          <div class="slider-row">
-            <label id="r100-slider-label">Jumlah outreach</label>
-            <input type="range" min="0" max="150" value="0" step="1" id="r100-slider" oninput="updateR100()">
-            <span class="slider-val" id="r100-val">0</span>
+
+          <!-- 4 INPUT MODE -->
+          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:16px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+              <div>
+                <label style="color:#f0c040;margin-bottom:4px">🟡 Warm Outreach</label>
+                <input type="number" id="r100-warm" min="0" placeholder="0" oninput="updateR100Total()" style="margin-bottom:0">
+              </div>
+              <div>
+                <label style="color:#3ecf8e;margin-bottom:4px">🟢 Post Konten (mnt)</label>
+                <input type="number" id="r100-content" min="0" placeholder="0" oninput="updateR100Total()" style="margin-bottom:0">
+              </div>
+              <div>
+                <label style="color:#7c6af5;margin-bottom:4px">🔵 Cold Outreach</label>
+                <input type="number" id="r100-cold" min="0" placeholder="0" oninput="updateR100Total()" style="margin-bottom:0">
+              </div>
+              <div>
+                <label style="color:#ff6b35;margin-bottom:4px">🟠 Paid Ads (mnt)</label>
+                <input type="number" id="r100-ads" min="0" placeholder="0" oninput="updateR100Total()" style="margin-bottom:0">
+              </div>
+            </div>
           </div>
+
+          <!-- TOTAL DISPLAY -->
+          <div style="background:var(--surface3);border-radius:var(--radius-sm);padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between">
+            <span style="font-size:14px;font-weight:800;color:var(--text2)">TOTAL HARI INI</span>
+            <span id="r100-total-display" style="font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--text)">0</span>
+          </div>
+
+          <div class="progress-bar" style="height:10px"><div class="progress-fill" id="r100-progress" style="width:0%"></div></div>
+          <div class="progress-label" style="margin-bottom:10px"><span id="r100-pct-text">0% dari target 100</span><span id="r100-counter-label"></span></div>
+
           <div style="margin-bottom:12px">
-            <label>Atau masukkan angka langsung</label>
-            <input type="number" id="r100-input-num" min="0" max="999" placeholder="0" oninput="syncR100Input()" style="max-width:120px;margin-bottom:0">
-          </div>
-          <div class="progress-bar"><div class="progress-fill" id="r100-progress" style="width:0%"></div></div>
-          <div class="progress-label"><span id="r100-pct-text">0%</span><span>Target: 100</span></div>
-          <div class="big-counter" id="r100-big">0</div>
-          <div class="counter-label" id="r100-counter-label">dari target 100 hari ini</div>
-          <div style="margin-bottom:12px;margin-top:16px">
             <label>Catatan (opsional)</label>
             <textarea id="r100-note" placeholder="Hambatan, insight, atau refleksi hari ini..." style="min-height:60px;margin-bottom:0"></textarea>
           </div>
@@ -720,25 +727,36 @@
           <div id="r100-save-msg" style="display:none;margin-top:10px;font-size:14px;font-weight:700;color:var(--green);text-align:center"></div>
         </div>
 
+        <!-- STATS KANAN -->
         <div>
           <div class="metrics-grid">
             <div class="metric-card"><div class="metric-label">Hari Selesai (≥100)</div><div class="metric-value green" id="r100-days">0</div><div class="metric-sub">dari 100 target</div></div>
-            <div class="metric-card"><div class="metric-label">Total Aksi</div><div class="metric-value amber" id="r100-total">0</div><div class="metric-sub">kumulatif</div></div>
+            <div class="metric-card"><div class="metric-label">Total Aksi Kumulatif</div><div class="metric-value amber" id="r100-total">0</div><div class="metric-sub">semua mode</div></div>
             <div class="metric-card"><div class="metric-label">Hari Tersisa</div><div class="metric-value" id="r100-remain">100</div><div class="metric-sub">untuk selesai</div></div>
             <div class="metric-card"><div class="metric-label">Streak Tertinggi</div><div class="metric-value blue" id="r100-streak">0</div><div class="metric-sub">hari berturut</div></div>
           </div>
+
+          <!-- BREAKDOWN KUMULATIF -->
+          <div class="card" style="margin-bottom:16px">
+            <div class="card-title" style="font-size:17px">📊 Breakdown Kumulatif</div>
+            <div class="info-row"><span class="info-label">🟡 Warm Outreach</span><span class="info-val" id="r100-cum-warm">0</span></div>
+            <div class="info-row"><span class="info-label">🟢 Post Konten (mnt)</span><span class="info-val" id="r100-cum-content">0</span></div>
+            <div class="info-row"><span class="info-label">🔵 Cold Outreach</span><span class="info-val" id="r100-cum-cold">0</span></div>
+            <div class="info-row"><span class="info-label">🟠 Paid Ads (mnt)</span><span class="info-val" id="r100-cum-ads">0</span></div>
+          </div>
+
           <div class="card">
-            <div class="card-title">📜 Janji Hormozi</div>
-            <p style="font-size:16px;font-weight:700;color:var(--text2);line-height:1.8;font-style:italic">"Jika kamu melakukan 100 tindakan utama per hari, dan kamu melakukannya 100 hari berturut-turut, kamu AKAN mendapatkan lebih banyak engaged leads. Ini bukan teori. Ini jaminan."</p>
+            <div class="card-title" style="font-size:17px">📜 Janji Hormozi</div>
+            <p style="font-size:15px;font-weight:700;color:var(--text2);line-height:1.8;font-style:italic">"Jika kamu melakukan 100 tindakan utama per hari, dan kamu melakukannya 100 hari berturut-turut, kamu AKAN mendapatkan lebih banyak engaged leads. Ini bukan teori. Ini jaminan."</p>
             <p style="font-size:14px;font-weight:800;color:var(--text3);margin-top:10px">— Alex Hormozi, $100M Leads</p>
           </div>
         </div>
       </div>
 
-      <!-- HISTORY RULE OF 100 -->
+      <!-- HISTORY -->
       <div class="card">
         <div class="card-title" style="display:flex;justify-content:space-between;align-items:center">
-          <span><div class="icon" style="background:var(--amber-bg);display:inline-flex">📋</div> History Rule of 100 — Mode: <span id="r100-mode-label" style="color:var(--accent);margin-left:6px">Warm Outreach</span></span>
+          <span><div class="icon" style="background:var(--amber-bg);display:inline-flex">📋</div> History Rule of 100</span>
           <button class="btn btn-sm btn-red" onclick="clearR100History()" style="font-size:12px">🗑️ Hapus Semua</button>
         </div>
         <div id="r100-history-container">
@@ -988,113 +1006,103 @@ function clearCFHistory() {
 }
 
 /* =============================================
-   RULE OF 100 — FIXED
+   RULE OF 100 — COMBINED 4 MODE
+   Entry: { id, date, warm, content, cold, ads, total, done, note }
    ============================================= */
-var r100Modes = {
-  warm:    { label: 'Jumlah warm outreach hari ini', desc: '100 warm outreach per hari (pesan, telepon, DM ke orang yang kamu kenal). Target: 100 hari berturut-turut tanpa skip.', name: 'Warm Outreach' },
-  content: { label: 'Menit membuat konten hari ini', desc: '100 menit per hari membuat konten. Publish minimal 1 konten per hari. Target: 100 hari berturut-turut.', name: 'Post Konten' },
-  cold:    { label: 'Jumlah cold outreach hari ini', desc: '100 cold outreach per hari (email, DM, telepon ke orang asing yang sesuai target market). Target: 100 hari berturut-turut.', name: 'Cold Outreach' },
-  ads:     { label: 'Menit kerja paid ads hari ini', desc: '100 menit per hari membuat dan mengoptimalkan paid ads. Jalankan kampanye selama 100 hari berturut-turut.', name: 'Paid Ads' }
-};
+
+/* Migrate old per-mode data jika ada */
+var STORAGE_R100_V3 = '100ml_rule100_v3';
+var r100History = loadStorage(STORAGE_R100_V3, []);
 
 function initR100Date() {
   document.getElementById('r100-date').value = todayStr();
 }
 
-function setR100Mode(mode, btn) {
-  state.r100Mode = mode;
-  document.querySelectorAll('#rule100 .tab-group .tab').forEach(function(b) { b.classList.remove('active'); });
-  btn.classList.add('active');
-  document.getElementById('r100-slider-label').textContent = r100Modes[mode].label;
-  document.getElementById('r100-desc').textContent = r100Modes[mode].desc;
-  document.getElementById('r100-mode-label').textContent = r100Modes[mode].name;
-  updateR100Metrics();
-  renderR100History();
-}
+function updateR100Total() {
+  var warm    = parseInt(document.getElementById('r100-warm').value)    || 0;
+  var content = parseInt(document.getElementById('r100-content').value) || 0;
+  var cold    = parseInt(document.getElementById('r100-cold').value)    || 0;
+  var ads     = parseInt(document.getElementById('r100-ads').value)     || 0;
+  var total = warm + content + cold + ads;
 
-function updateR100() {
-  var val = parseInt(document.getElementById('r100-slider').value);
-  document.getElementById('r100-val').textContent = val;
-  document.getElementById('r100-big').textContent = val;
-  document.getElementById('r100-input-num').value = val;
-  var pct = Math.min(100, val);
+  var pct = Math.min(100, Math.round(total / 100 * 100));
+  var totalEl = document.getElementById('r100-total-display');
+  totalEl.textContent = total;
+  totalEl.style.color = total >= 100 ? 'var(--green)' : total >= 50 ? 'var(--amber)' : 'var(--text)';
+
   document.getElementById('r100-progress').style.width = pct + '%';
-  document.getElementById('r100-pct-text').textContent = pct + '%';
-  document.getElementById('r100-counter-label').textContent = val >= 100 ? '🔥 TARGET HARI INI TERCAPAI!' : 'dari target 100 hari ini';
-}
-
-function syncR100Input() {
-  var val = Math.min(150, Math.max(0, parseInt(document.getElementById('r100-input-num').value) || 0));
-  document.getElementById('r100-slider').value = val;
-  updateR100();
+  document.getElementById('r100-pct-text').textContent = pct + '% dari target 100';
+  document.getElementById('r100-counter-label').textContent = total >= 100 ? '🔥 TARGET TERCAPAI!' : '';
 }
 
 function logR100Day() {
-  var date = document.getElementById('r100-date').value || todayStr();
-  var val = parseInt(document.getElementById('r100-slider').value);
-  var note = document.getElementById('r100-note').value.trim();
-  var mode = state.r100Mode;
-  var done = val >= 100;
+  var date    = document.getElementById('r100-date').value || todayStr();
+  var warm    = parseInt(document.getElementById('r100-warm').value)    || 0;
+  var content = parseInt(document.getElementById('r100-content').value) || 0;
+  var cold    = parseInt(document.getElementById('r100-cold').value)    || 0;
+  var ads     = parseInt(document.getElementById('r100-ads').value)     || 0;
+  var note    = document.getElementById('r100-note').value.trim();
+  var total   = warm + content + cold + ads;
+  var done    = total >= 100;
 
-  if (!r100Data[mode]) r100Data[mode] = [];
-
-  /* KEY FIX: update if same date already exists — don't add new entry */
-  var existing = r100Data[mode].findIndex(function(h) { return h.date === date; });
-  var entry = { id: uid(), date: date, val: val, done: done, note: note };
+  /* Update if same date exists */
+  var existing = r100History.findIndex(function(h) { return h.date === date; });
+  var entry = { id: uid(), date: date, warm: warm, content: content, cold: cold, ads: ads, total: total, done: done, note: note };
   var isUpdate = false;
   if (existing >= 0) {
-    entry.id = r100Data[mode][existing].id;
-    r100Data[mode][existing] = entry;
+    entry.id = r100History[existing].id;
+    r100History[existing] = entry;
     isUpdate = true;
   } else {
-    r100Data[mode].push(entry);
+    r100History.push(entry);
   }
+  r100History.sort(function(a, b) { return a.date.localeCompare(b.date); });
+  saveStorage(STORAGE_R100_V3, r100History);
 
-  /* Sort by date ascending for streak calc */
-  r100Data[mode].sort(function(a, b) { return a.date.localeCompare(b.date); });
-  saveStorage(STORAGE_R100, r100Data);
-
-  /* Reset slider */
-  document.getElementById('r100-slider').value = 0;
-  document.getElementById('r100-input-num').value = '';
-  document.getElementById('r100-date').value = todayStr();
+  /* Reset inputs */
+  ['r100-warm','r100-content','r100-cold','r100-ads'].forEach(function(id) { document.getElementById(id).value = ''; });
   document.getElementById('r100-note').value = '';
-  updateR100();
+  document.getElementById('r100-date').value = todayStr();
+  updateR100Total();
   updateR100Metrics();
   renderR100History();
 
   var msg = isUpdate
     ? '🔄 Data hari ' + formatDate(date) + ' diperbarui!'
-    : '✅ Hari ' + formatDate(date) + ' berhasil dicatat!' + (done ? ' 🔥 TARGET TERCAPAI!' : '');
+    : '✅ Hari ' + formatDate(date) + ' dicatat! Total: ' + total + (done ? ' 🔥 TARGET TERCAPAI!' : '');
   var msgEl = document.getElementById('r100-save-msg');
   msgEl.textContent = msg;
   msgEl.style.display = 'block';
-  setTimeout(function() { msgEl.style.display = 'none'; }, 3000);
+  setTimeout(function() { msgEl.style.display = 'none'; }, 3500);
 }
 
 function updateR100Metrics() {
-  var mode = state.r100Mode;
-  var hist = r100Data[mode] || [];
-
+  var hist = r100History;
   var daysCompleted = hist.filter(function(h) { return h.done; }).length;
-  var totalActions = hist.reduce(function(s, h) { return s + h.val; }, 0);
+  var totalAll  = hist.reduce(function(s,h) { return s + h.total;   }, 0);
+  var cumWarm   = hist.reduce(function(s,h) { return s + h.warm;    }, 0);
+  var cumContent= hist.reduce(function(s,h) { return s + h.content; }, 0);
+  var cumCold   = hist.reduce(function(s,h) { return s + h.cold;    }, 0);
+  var cumAds    = hist.reduce(function(s,h) { return s + h.ads;     }, 0);
 
-  /* Current streak — consecutive days with done=true, counting backwards from today */
   var maxStreak = 0, curStreak = 0;
   hist.forEach(function(h) {
     if (h.done) { curStreak++; if (curStreak > maxStreak) maxStreak = curStreak; }
     else curStreak = 0;
   });
 
-  document.getElementById('r100-days').textContent = daysCompleted;
-  document.getElementById('r100-total').textContent = totalActions;
-  document.getElementById('r100-remain').textContent = Math.max(0, 100 - daysCompleted);
-  document.getElementById('r100-streak').textContent = maxStreak;
+  document.getElementById('r100-days').textContent    = daysCompleted;
+  document.getElementById('r100-total').textContent   = totalAll;
+  document.getElementById('r100-remain').textContent  = Math.max(0, 100 - daysCompleted);
+  document.getElementById('r100-streak').textContent  = maxStreak;
+  document.getElementById('r100-cum-warm').textContent    = cumWarm;
+  document.getElementById('r100-cum-content').textContent = cumContent;
+  document.getElementById('r100-cum-cold').textContent    = cumCold;
+  document.getElementById('r100-cum-ads').textContent     = cumAds;
 }
 
 function renderR100History() {
-  var mode = state.r100Mode;
-  var hist = (r100Data[mode] || []).slice().reverse(); /* newest first */
+  var hist = r100History.slice().reverse(); /* newest first */
   var container = document.getElementById('r100-history-container');
 
   if (hist.length === 0) {
@@ -1102,31 +1110,30 @@ function renderR100History() {
     return;
   }
 
+  var sorted = r100History; /* already sorted asc */
   var html = '<div style="overflow-x:auto"><table class="history-table"><thead><tr>';
-  html += '<th>Hari</th><th>Tanggal</th><th>Aksi</th><th>Progress</th><th>Status</th><th>Catatan</th><th>Aksi</th></tr></thead><tbody>';
+  html += '<th>Hari</th><th>Tanggal</th><th>🟡 Warm</th><th>🟢 Konten</th><th>🔵 Cold</th><th>🟠 Ads</th><th>Total</th><th>Status</th><th>Catatan</th><th>Aksi</th>';
+  html += '</tr></thead><tbody>';
 
-  var sorted = (r100Data[mode] || []).slice().sort(function(a,b) { return a.date.localeCompare(b.date); });
-  var histWithDay = hist.map(function(h) {
-    var idx = sorted.findIndex(function(x) { return x.id === h.id; });
-    return { h: h, dayNum: idx + 1 };
-  });
-
-  histWithDay.forEach(function(item) {
-    var h = item.h;
-    var pct = Math.min(100, Math.round(h.val / 100 * 100));
-    var statusColor = h.done ? 'var(--green)' : h.val > 0 ? 'var(--amber)' : 'var(--red)';
-    var statusText = h.done ? '✅ Selesai' : h.val > 0 ? '⚠️ Kurang' : '❌ Skip';
+  hist.forEach(function(h) {
+    var dayNum = sorted.findIndex(function(x) { return x.id === h.id; }) + 1;
+    var pct = Math.min(100, Math.round(h.total / 100 * 100));
+    var statusColor = h.done ? 'var(--green)' : h.total > 0 ? 'var(--amber)' : 'var(--red)';
+    var statusText  = h.done ? '✅ Selesai' : h.total > 0 ? '⚠️ Kurang' : '❌ Skip';
 
     html += '<tr>';
-    html += '<td><strong style="color:var(--accent)">Hari ' + item.dayNum + '</strong></td>';
+    html += '<td><strong style="color:var(--accent)">Hari ' + dayNum + '</strong></td>';
     html += '<td>' + formatDate(h.date) + '</td>';
-    html += '<td><strong style="color:' + statusColor + '">' + h.val + '</strong></td>';
-    html += '<td style="min-width:100px">';
-    html += '<div class="progress-bar" style="margin:0"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
-    html += '<div style="font-size:12px;color:var(--text3);margin-top:2px">' + pct + '%</div>';
+    html += '<td>' + h.warm    + '</td>';
+    html += '<td>' + h.content + '</td>';
+    html += '<td>' + h.cold    + '</td>';
+    html += '<td>' + h.ads     + '</td>';
+    html += '<td>';
+    html += '<strong style="color:' + statusColor + ';font-size:16px">' + h.total + '</strong>';
+    html += '<div class="progress-bar" style="margin:4px 0 0;width:80px"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
     html += '</td>';
-    html += '<td><span style="color:' + statusColor + ';font-weight:800">' + statusText + '</span></td>';
-    html += '<td style="max-width:140px;font-size:13px;color:var(--text3)">' + (h.note ? h.note.substring(0,50)+(h.note.length>50?'...':'') : '—') + '</td>';
+    html += '<td><span style="color:' + statusColor + ';font-weight:800;white-space:nowrap">' + statusText + '</span></td>';
+    html += '<td style="max-width:130px;font-size:13px;color:var(--text3)">' + (h.note ? h.note.substring(0,45)+(h.note.length>45?'...':'') : '—') + '</td>';
     html += '<td class="td-actions"><button class="btn btn-sm btn-blue" onclick="editR100Entry(\'' + h.id + '\')">✏️</button> <button class="btn btn-sm btn-red" onclick="deleteR100Entry(\'' + h.id + '\')">🗑️</button></td>';
     html += '</tr>';
   });
@@ -1136,31 +1143,34 @@ function renderR100History() {
 }
 
 function editR100Entry(id) {
-  var mode = state.r100Mode;
-  var h = (r100Data[mode] || []).find(function(x) { return x.id === id; });
+  var h = r100History.find(function(x) { return x.id === id; });
   if (!h) return;
-  modalCtx = { type: 'r100', id: id, mode: mode };
+  modalCtx = { type: 'r100', id: id };
   document.getElementById('modal-title').textContent = '✏️ Edit Data — ' + formatDate(h.date);
   document.getElementById('modal-body').innerHTML =
     '<label>Tanggal</label><input type="date" id="me-date" value="' + h.date + '">' +
-    '<label>' + r100Modes[mode].label + '</label><input type="number" id="me-r100-val" value="' + h.val + '" min="0">' +
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">' +
+    '<div><label style="color:#f0c040">🟡 Warm Outreach</label><input type="number" id="me-r100-warm" value="' + h.warm + '" min="0"></div>' +
+    '<div><label style="color:#3ecf8e">🟢 Post Konten (mnt)</label><input type="number" id="me-r100-content" value="' + h.content + '" min="0"></div>' +
+    '<div><label style="color:#7c6af5">🔵 Cold Outreach</label><input type="number" id="me-r100-cold" value="' + h.cold + '" min="0"></div>' +
+    '<div><label style="color:#ff6b35">🟠 Paid Ads (mnt)</label><input type="number" id="me-r100-ads" value="' + h.ads + '" min="0"></div>' +
+    '</div>' +
     '<label>Catatan</label><textarea id="me-r100-note">' + (h.note || '') + '</textarea>';
   document.getElementById('edit-modal').style.display = 'flex';
 }
 
 function deleteR100Entry(id) {
   if (!confirm('Hapus data hari ini?')) return;
-  var mode = state.r100Mode;
-  r100Data[mode] = (r100Data[mode] || []).filter(function(h) { return h.id !== id; });
-  saveStorage(STORAGE_R100, r100Data);
+  r100History = r100History.filter(function(h) { return h.id !== id; });
+  saveStorage(STORAGE_R100_V3, r100History);
   updateR100Metrics();
   renderR100History();
 }
 
 function clearR100History() {
-  if (!confirm('Hapus SEMUA history mode ' + r100Modes[state.r100Mode].name + '? Ini tidak bisa di-undo.')) return;
-  r100Data[state.r100Mode] = [];
-  saveStorage(STORAGE_R100, r100Data);
+  if (!confirm('Hapus SEMUA history Rule of 100? Ini tidak bisa di-undo.')) return;
+  r100History = [];
+  saveStorage(STORAGE_R100_V3, r100History);
   updateR100Metrics();
   renderR100History();
 }
@@ -1183,15 +1193,18 @@ function saveModalEdit() {
       renderCFHistory();
     }
   } else if (modalCtx.type === 'r100') {
-    var mode = modalCtx.mode;
-    var h2 = (r100Data[mode] || []).find(function(x) { return x.id === modalCtx.id; });
+    var h2 = r100History.find(function(x) { return x.id === modalCtx.id; });
     if (h2) {
-      h2.date = document.getElementById('me-date').value;
-      h2.val = parseInt(document.getElementById('me-r100-val').value) || 0;
-      h2.done = h2.val >= 100;
-      h2.note = document.getElementById('me-r100-note').value.trim();
-      r100Data[mode].sort(function(a,b) { return a.date.localeCompare(b.date); });
-      saveStorage(STORAGE_R100, r100Data);
+      h2.date    = document.getElementById('me-date').value;
+      h2.warm    = parseInt(document.getElementById('me-r100-warm').value)    || 0;
+      h2.content = parseInt(document.getElementById('me-r100-content').value) || 0;
+      h2.cold    = parseInt(document.getElementById('me-r100-cold').value)    || 0;
+      h2.ads     = parseInt(document.getElementById('me-r100-ads').value)     || 0;
+      h2.total   = h2.warm + h2.content + h2.cold + h2.ads;
+      h2.done    = h2.total >= 100;
+      h2.note    = document.getElementById('me-r100-note').value.trim();
+      r100History.sort(function(a,b) { return a.date.localeCompare(b.date); });
+      saveStorage(STORAGE_R100_V3, r100History);
       updateR100Metrics();
       renderR100History();
     }
@@ -1393,13 +1406,13 @@ function updateRoadmapMetrics() {
 initCFDate();
 initR100Date();
 renderCFHistory();
+updateR100Total();
 updateR100Metrics();
 renderR100History();
 buildChecklist(phase1Items, 'phase1-list', 'p1-bar', 'p1-pct', 'p1', 'rm-p1');
 buildChecklist(phase2Items, 'phase2-list', 'p2-bar', 'p2-pct', 'p2', 'rm-p2');
 buildChecklist(phase3Items, 'phase3-list', 'p3-bar', 'p3-pct', 'p3', 'rm-p3');
 updateRoadmapMetrics();
-updateR100();
 </script>
 </body>
 </html>
